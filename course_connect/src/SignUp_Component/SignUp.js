@@ -104,7 +104,14 @@ const SignUp = () => {
                 <label htmlFor = 'male'> Male </label>
                 <input type = 'radio' onClick = {() => {setMale(false); setFemale(true); setOther(false);}} id = 'female' name = 'gender' value = '1' />
                 <label htmlFor = 'female'> female </label>
-                <input type = 'radio' onClick = {() => {setMale(false); setFemale(false); setOther(true); }} id = 'other' name = 'gender' value = '2' />
+                <input type = 'radio' 
+                onClick = {() => 
+                {setMale(false); 
+                setFemale(false); 
+                setOther(true); }} 
+                id = 'other' 
+                name = 'gender' 
+                value = '2' />
                 <label htmlFor = 'other'> Non-Binary </label>
             </div>
 
