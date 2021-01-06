@@ -117,12 +117,57 @@ input[type="checkbox"] {
 	
 }
 
-.gender-select-container{
-	margin-top: 7%;
+
+
+.looking-for-container {
+	/* margin: -10%;
+	margin-top: 9%;
+	margin-bottom: 8%;
+	background-color: #eee;
+	padding: 3%;
+	border-radius: 3%; */
+
+	margin-top: 6%;
 	padding: 3%;
 	background-color: #eeeeee;
+	width:100%;
 	border-radius: 3%;
+}
 
+.looking-for-buttons {
+	display: flex;
+
+}
+
+
+.checkbox {
+	width: 21%;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 30%;
+}	
+
+.gender-buttons {
+	display: flex;
+}
+
+.gender-selection-container {
+	margin-top: 3%;
+	padding: 3%;
+	background-color: #eeeeee;
+	width:100%;
+	border-radius: 3%;
+}
+
+#nonBinary {
+	background-color:#fafafa;
+	
+}
+
+
+
+#allButtons {
+	margin-left: 6%;
+	float: none;
 }
 
 .form-container {
@@ -132,14 +177,6 @@ input[type="checkbox"] {
 	transition: all 0.6s ease-in-out;
 }
 
-.looking-for-container {
-	margin: -10%;
-	margin-top: 9%;
-	margin-bottom: 8%;
-	background-color: #eee;
-	padding: 3%;
-	border-radius: 3%;
-}
 
 .sign-in-container {
 	left: 0;
@@ -148,7 +185,7 @@ input[type="checkbox"] {
 }
 
 .sign-up-button {
-	/* margin-bottom: 10%; */
+	padding-bottom: 20px;
 }
 
 .container.right-panel-active .sign-in-container {
@@ -197,6 +234,9 @@ input[type="checkbox"] {
 	
 }
 
+#signUpLabel {
+	padding-top: 80px;
+}
 
 
 .overlay {

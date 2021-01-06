@@ -1,13 +1,5 @@
 import React, { useState, useEffect, useRef} from 'react';
 import '../SignInStyle.css'
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-
 const SignUp = () => {
 
     // const [person, setPerson] = useState({ email: '', password: ''})
@@ -35,7 +27,7 @@ const SignUp = () => {
     const NonBinary = () => {
         if (other == true) {
             return (
-                    <div>
+                    <div id='nonBinaryBox'>
                     <label htmlFor = "nonBinary"> Confirm Gender : </label>
                     <input 
                         type = 'text' 
@@ -56,6 +48,9 @@ const SignUp = () => {
     return (
         <div className="form-container sign-up-container" id='sign-up-form'>
         <form action = "#">
+                <div id='signUpLabel'>
+                <h1>Sign Up</h1>
+                </div>
                 <input 
                     type = 'text' 
                     id = 'name' 
@@ -79,7 +74,7 @@ const SignUp = () => {
                     type = 'password' 
                     id = 'password' 
                     name = 'password'
-                    placeholder = "Email" 
+                    placeholder = "passworrd" 
                     value = {password} 
                     onChange = {(e) => setPassword(e.target.value)} 
                 />
@@ -93,120 +88,56 @@ const SignUp = () => {
                     onChange = {(e) => setConfirmPassword(e.target.value)} 
                 />
 
+                <div className = 'gender-selection-container'>
 
-                {/* <label htmlFor = "gender"> Gender</label> */}
+                    <label htmlFor = "gender"> Gender</label>
+                    <div class="gender-buttons">
+                        <div>
+                            <input type = 'radio' onClick = {() => {setMale(true); setFemale(false); setOther(false);}} id = 'male' name = 'gender' value = '0' />
+                            <label htmlFor = 'male'> Male </label>
+                        </div>
+                        <div>
+                            <input type = 'radio' onClick = {() => {setMale(false); setFemale(true); setOther(false);}} id = 'female' name = 'gender' value = '1' />
+                            <label htmlFor = 'female'> female </label>
+                        </div>
+                        <div>
+                            <input type = 'radio' onClick = {() => {setMale(false); setFemale(false); setOther(true); }} id = 'other' name = 'gender' value = '2' />
+                            <label htmlFor = 'other'> Non-Binary </label>
+                        </div>
 
-                <div className='gender-select-container'>
-                <FormLabel component="legend">Gender</FormLabel>
-                <RadioGroup row aria-label="position" name="position" defaultValue="top" >
-
-                    <FormControlLabel 
-                        value = "male"
-                        control = {
-                            <Radio onClick = {() => {setMale(true); setFemale(false); setOther(false); }} />
-                        }
-                        label = "Male"
-                        labelPlacement = "bottom"
-                    />
-
-                    <FormControlLabel 
-                        value = "female"
-                        control = {
-                            <Radio onClick = {() => {setMale(false); setFemale(true); setOther(false); }} />
-                        }
-                        label = "Female"
-                        labelPlacement = "bottom"
-                    />
-
-                    <FormControlLabel 
-                        value = "other"
-                        control = {
-                            <Radio onClick = {() => {setMale(false); setFemale(false); setOther(true); }} />
-                        }
-                        label = "Other"
-                        labelPlacement = "bottom"
-                    />
-                    
-
-                </RadioGroup>
-                <NonBinary key = 'pls'/> 
+                    </div>
+                        
+                    <NonBinary key = 'pls'/> 
                 </div>
-                {/* <div class="gender-buttons">
-                <input type = 'radio' onClick = {() => {setMale(true); setFemale(false); setOther(false);}} id = 'male' name = 'gender' value = '0' />
-                
-                <label htmlFor = 'male'> Male </label>
-                <input type = 'radio' onClick = {() => {setMale(false); setFemale(true); setOther(false);}} id = 'female' name = 'gender' value = '1' />
-                <label htmlFor = 'female'> female </label>
-                <input type = 'radio' 
-                onClick = {() => 
-                {setMale(false); 
-                setFemale(false); 
-                setOther(true); }} 
-                id = 'other' 
-                name = 'gender' 
-                value = '2' />
-
-                </div>
-                <label htmlFor = 'other'> Non-Binary </label>
-            
-            <NonBinary key = 'pls'/>  */}
-
 
             
 
                 
                 <div className = 'looking-for-container'>
                 
-                <FormLabel component="legend">I'm looking for a...</FormLabel>
-                
-                <FormGroup row >
-                    <FormControlLabel 
-                            className = 'checkbox'
-                            value = "friend"
-                            control = {
-                                <Checkbox 
-                                checked = {friend} 
-                                onChange = {(e) => {setFriend(e.target.checked)}} 
-                                value = '0'/>
-                            }
-                            label = "friend"
-                            labelPlacement = 'bottom'
-                    />
-                    <FormControlLabel 
-                            className = 'checkbox'
-                            value = "studdyBuddy"
-                            control = {
-                                <Checkbox 
-                                checked = {studyBuddy} 
-                                onChange = {(e) => {setStudyBuddy(e.target.checked)}}  
-                                value = '0'/>
-                            }
-                            label = {"studdy buddy"}
-                            labelPlacement = 'bottom'
-                    />
-                    <FormControlLabel 
-                            className = 'checkbox'
-                            value = "sex"
-                            control = {
-                                <Checkbox 
-                                checked = {sex} 
-                                onChange = {(e) => {setSex(e.target.checked)}} 
-                                value = '0'/>
-                            }
-                            label = "friend ;)"
-                            labelPlacement = 'bottom'
-                    />
-                    
-                    {/* <input type = 'checkbox' onClick = {() => {setStudyBuddy( !studyBuddy)}} id = 'study buddy' name = 'study buddy' value = '0'/>
-                    <label htmlFor = 'study buddy' >Study buddy (pussy)</label> 
+                    <label> I'm looking for a... </label>
+                    <div className = 'looking-for-buttons'>
 
-                    <input type = 'checkbox' onClick = {() => {setFriend(!friend)}} id = 'friend' name = 'friend' value = '1'/>
-                    <label htmlFor = 'friend'>friend</label> 
 
-                    <input type = 'checkbox' onClick = {() => {setSex(!sex)}} id = 'sex' name = 'sex' value = '2'/>
-                    <label htmlFor = 'sex'>friend ;)</label>  */}
-                    </FormGroup>
+
+                        <div>
+                            <input type = 'checkbox' onClick = {() => {setStudyBuddy( !studyBuddy)}} id = 'study buddy' name = 'study buddy' value = '0'/>
+                            <label htmlFor = 'study buddy' >Study buddy</label> 
+                        </div>
+
+                        <div>
+                            <input type = 'checkbox' onClick = {() => {setFriend(!friend)}} id = 'friend' name = 'friend' value = '1'/>
+                            <label htmlFor = 'friend'>friend</label> 
+                        </div>
+
+                        <div>
+                            <input type = 'checkbox' onClick = {() => {setSex(!sex)}} id = 'sex' name = 'sex' value = '2'/>
+                            <label htmlFor = 'sex'>friend ;)</label>
+                        </div>
+                        
+        
                     </div>
+                </div>
 
 
 
