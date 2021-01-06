@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import './SignUpStyle.css'
 
 const SignUp = () => {
@@ -16,6 +16,14 @@ const SignUp = () => {
     const [female, setFemale] = useState(false);
     const [other, setOther] = useState(false);
     const [nonBinary, setNonBinary] = useState('');
+    const whereWeAt = useRef(document.getElementById('name'));
+
+    
+
+    
+    useEffect(() => {whereWeAt.current.focus()},[nonBinary]);
+    
+
 
     const NonBinary = () => {
         if (other == true) {
@@ -27,8 +35,9 @@ const SignUp = () => {
                         id = 'nonBinary'
                         key = 'nonBinary'
                         name = 'nonBinary' 
+                        ref = {whereWeAt}
                         value = {nonBinary} 
-                        onChange = {(e) => setNonBinary(e.target.value)} 
+                        onChange = {(e) => {setNonBinary(e.target.value); }} 
                     /> 
                 </div>  
                 );
@@ -37,19 +46,19 @@ const SignUp = () => {
         }
     }
 
-    const NonBinaryComponent = () => {
-        <div>
-                    <label htmlFor = "nonBinary"> Confirm Gender : </label>
-                    <input 
-                        type = 'text' 
-                        id = 'nonBinary'
-                        key = 'nonBinary'
-                        name = 'nonBinary' 
-                        value = {nonBinary} 
-                        onChange = {(e) => setNonBinary(e.target.value)} 
-                    /> 
-                </div>  
-    }
+    // const NonBinaryComponent = () => {
+    //     <div>
+    //                 <label htmlFor = "nonBinary"> Confirm Gender : </label>
+    //                 <input 
+    //                     type = 'text' 
+    //                     id = 'nonBinary'
+    //                     key = 'nonBinary'
+    //                     name = 'nonBinary' 
+    //                     value = {nonBinary} 
+    //                     onChange = {(e) => setNonBinary(e.target.value)} 
+    //                 /> 
+    //             </div>  
+    // }
     
 
     return (
@@ -60,6 +69,7 @@ const SignUp = () => {
                     type = 'text' 
                     id = 'name' 
                     name = 'name' 
+                    ref = {whereWeAt}
                     value = {name} 
                     onChange = { (e) => setName(e.target.value) } 
                 /> 
@@ -115,7 +125,7 @@ const SignUp = () => {
                 <label htmlFor = 'other'> Non-Binary </label>
             </div>
 
-            <NonBinary/> 
+            <NonBinary key = 'pls'/> 
 
             <div className = "relationshipChecks">
                 <div>
@@ -132,6 +142,7 @@ const SignUp = () => {
             <div>
                 <button type = 'submit' onClick = { (e) => {e.preventDefault(); console.log(email, password)} }> Login </button>
             </div>
+            {console.log(document.activeElement)}
         </form>
     );
 
