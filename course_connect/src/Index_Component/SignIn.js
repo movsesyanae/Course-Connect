@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import './SignInStyle.css'
+import '../SignInStyle.css'
 
 const SignIn = () => {
 
@@ -13,32 +13,30 @@ const SignIn = () => {
 
 
     return (
-        <form>
-            <div>
-                <label htmlFor = "email"> email : </label>
+        <div class="form-container sign-in-container">
+        <form action = '#'>
+            <h1>Sign in</h1>
                 <input 
                     type = 'text' 
                     id = 'email' 
+                    placeholder = 'email'
                     name = 'email' 
                     value = {email} 
                     onChange = { (e) => setEmail(e.target.value) } 
                 /> 
-            </div>
 
-            <div>
-                <label htmlFor = "password"> Password : </label>
                 <input 
                     type = 'password' 
                     id = 'password' 
+                    placeholder ='password'
                     name = 'password' 
                     value = {password} 
                     onChange = {(e) => setPassword(e.target.value)} 
-                /> 
-            </div>
-            <div>
+                />
+
                 <button type = 'submit' onClick = { (e) => {e.preventDefault(); console.log(email, password)} }> Login </button>
-            </div>
-        </form>
+           </form>
+        </div>
     );
 
     
