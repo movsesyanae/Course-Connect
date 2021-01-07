@@ -135,8 +135,9 @@ input[type="checkbox"] {
 }
 
 .looking-for-buttons {
-	display: flex;
 
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
 }
 
 
@@ -147,7 +148,8 @@ input[type="checkbox"] {
 }	
 
 .gender-buttons {
-	display: flex;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
 }
 
 .gender-selection-container {
@@ -160,6 +162,7 @@ input[type="checkbox"] {
 
 #nonBinary {
 	background-color:#fafafa;
+	text-align: center;
 	
 }
 
@@ -235,7 +238,7 @@ input[type="checkbox"] {
 }
 
 #signUpLabel {
-	padding-top: 80px;
+	padding-top: 10%;
 }
 
 

@@ -28,12 +28,13 @@ const SignUp = () => {
         if (other == true) {
             return (
                     <div id='nonBinaryBox'>
-                    <label htmlFor = "nonBinary"> Confirm Gender : </label>
+                    {/* <label htmlFor = "nonBinary"> Confirm Gender : </label> */}
                     <input 
                         type = 'text' 
                         id = 'nonBinary'
                         key = 'nonBinary'
-                        name = 'nonBinary' 
+                        name = 'nonBinary'
+                        placeholder = 'specify gender' 
                         ref = {whereWeAt}
                         value = {nonBinary} 
                         onChange = {(e) => {setNonBinary(e.target.value); }} 
@@ -98,11 +99,11 @@ const SignUp = () => {
                         </div>
                         <div>
                             <input type = 'radio' onClick = {() => {setMale(false); setFemale(true); setOther(false);}} id = 'female' name = 'gender' value = '1' />
-                            <label htmlFor = 'female'> female </label>
+                            <label htmlFor = 'female'> Female </label>
                         </div>
                         <div>
                             <input type = 'radio' onClick = {() => {setMale(false); setFemale(false); setOther(true); }} id = 'other' name = 'gender' value = '2' />
-                            <label htmlFor = 'other'> Non-Binary </label>
+                            <label htmlFor = 'other'> Other </label>
                         </div>
 
                     </div>
