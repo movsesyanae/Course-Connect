@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef} from 'react';
-import '../SignInStyle.css'
+import './SignInStyle.css'
 const SignUp = () => {
 
     // const [person, setPerson] = useState({ email: '', password: ''})
