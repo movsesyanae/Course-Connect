@@ -135,7 +135,7 @@ input[type="checkbox"] {
 }
 
 .looking-for-buttons {
-	display: flex;
+	/*display: flex;*/
 
 }
 
@@ -150,6 +150,32 @@ input[type="checkbox"] {
 	display: flex;
 }
 
+#genderLabel {
+	margin: auto;
+	width: 50%;
+}
+
+#gb1 {
+	
+	margin:0;
+	position:sticky;
+	left: 20%;
+}
+
+#gb2 {
+
+	margin:0;
+	position:sticky;
+	left: 40%;
+}
+
+#gb3 {
+
+	margin:0;
+	position:sticky;
+	left: 90%;
+}
+
 .gender-selection-container {
 	margin-top: 3%;
 	padding: 3%;
@@ -158,9 +184,15 @@ input[type="checkbox"] {
 	border-radius: 3%;
 }
 
+
+
 #nonBinary {
 	background-color:#fafafa;
 	
+}
+
+#nonBinaryBox {
+	margin-top: 5%;
 }
 
 

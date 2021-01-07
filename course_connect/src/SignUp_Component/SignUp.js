@@ -90,17 +90,17 @@ const SignUp = () => {
 
                 <div className = 'gender-selection-container'>
 
-                    <label htmlFor = "gender"> Gender</label>
+                    <label htmlFor = "gender" id="genderLabel"> Gender</label>
                     <div class="gender-buttons">
-                        <div>
+                        <div id = "gb1">
                             <input type = 'radio' onClick = {() => {setMale(true); setFemale(false); setOther(false);}} id = 'male' name = 'gender' value = '0' />
                             <label htmlFor = 'male'> Male </label>
                         </div>
-                        <div>
+                        <div id = "gb2">
                             <input type = 'radio' onClick = {() => {setMale(false); setFemale(true); setOther(false);}} id = 'female' name = 'gender' value = '1' />
                             <label htmlFor = 'female'> female </label>
                         </div>
-                        <div>
+                        <div id = "gb3">
                             <input type = 'radio' onClick = {() => {setMale(false); setFemale(false); setOther(true); }} id = 'other' name = 'gender' value = '2' />
                             <label htmlFor = 'other'> Non-Binary </label>
                         </div>
