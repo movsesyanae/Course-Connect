@@ -1,13 +1,36 @@
-
+import {useState} from 'react'
 import SignIn from './SignIn'
+import './SignInStyle.css'
 import SignUp from './SignUp'
 
 const SignUp_SignIn_Component = () => {
+	const [signUpFailMessage, setsignUpFailMessage] = useState('');
+
+	const errorHandler = (value) => {
+		setsignUpFailMessage(value); 
+		console.log(signUpFailMessage);
+	}
+
+	const ErrorBox = () => {
+		console.log(signUpFailMessage);
+			if(signUpFailMessage != '') {
+				return (
+					<div id = 'ErrorBox'>
+  						<span class="closebtn" onClick={() => setsignUpFailMessage('')}>&times;</span> 
+							{signUpFailMessage}
+					</div>
+				);
+			}
+			return(<></>);
+	}
+
     return(
+		<>
         <div class = "container" id = "container">
 
 			<SignIn />
-			<SignUp />
+			<SignUp failMessage = {(value) => errorHandler(value)}/>
+			
 
 			<div class="overlay-container">
 				<div class="overlay">
@@ -24,6 +47,9 @@ const SignUp_SignIn_Component = () => {
 				</div>
 			</div>
 		</div>
+
+		<ErrorBox/>
+		</>
 
     );
 }
