@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef} from 'react';
 import './SignInStyle.css'
-const SignUp = () => {
+const SignUp = props => {
 
     // const [person, setPerson] = useState({ email: '', password: ''})
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [gender, setGender] = useState('');
     const [studyBuddy, setStudyBuddy] = useState(false);
     const [friend, setFriend] = useState(false);
     const [sex, setSex] = useState(false);
@@ -15,12 +14,50 @@ const SignUp = () => {
     const [female, setFemale] = useState(false);
     const [other, setOther] = useState(false);
     const [nonBinary, setNonBinary] = useState('');
+    const [signUpFailMessage, setsignUpFailMessage] = useState('');
     const whereWeAt = useRef(document.getElementById('name'));
 
     
 
     
     useEffect(() => {whereWeAt.current.focus()},[nonBinary]);
+
+    function submitHandler (e) {
+        e.preventDefault();
+
+        let stringInputs = [name,email,password,confirmPassword,nonBinary];
+        let submitPass = true;  //as long as true should succefully submit
+
+        if(name == '' || email == '' || password == '' || confirmPassword == '' ||  (!studyBuddy && !friend && !sex) || (!male && !female && !other) || (other && nonBinary == '')) {
+            props.failMessage('You have not selected all fields');
+            submitPass = false;
+            return;
+        }
+
+
+        for(let x in stringInputs) { //injection prevention
+            console.log(stringInputs[x]);
+            if(stringInputs[x].includes('\'') || stringInputs[x].includes('<') || stringInputs[x].includes('>')) {
+                props.failMessage('You may not include symbols such as \' or < >');
+                submitPass = false;
+                return;
+            }
+        }
+
+        if(!(password == confirmPassword)) { //FIX: passwords showing up in console
+            props.failMessage('Passwords must match!');
+            submitPass = false;
+            return;
+        }
+
+        if(!email.endsWith('@umd.edu')) {
+            props.failMessage('Please use a @umd.edu email');
+            submitPass = false;
+            return;
+        }
+
+        
+    }
     
 
 
@@ -145,7 +182,7 @@ const SignUp = () => {
             
             <div className = 'sign-up-button'>
 
-                <button type = 'submit' onClick = { (e) => {e.preventDefault(); console.log(email, password)} }> Sign Up </button>
+                <button type = 'submit' onClick = { (e) => {submitHandler(e);} }> Sign Up </button>
             </div>
             {console.log(document.activeElement)}
         </form>
