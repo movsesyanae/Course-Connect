@@ -1,0 +1,149 @@
+
+
+.course-inputs {
+    
+	display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 3%;
+}
+
+.course-input-package {
+    background-color: #eee;
+    margin: 5%;
+    padding: 7%;
+    padding-top: 4%;
+    
+    /* width: 100%; */
+    border-radius: 4%;
+    
+	display: grid;
+    /* grid-template-rows: 1fr 1fr; */
+    grid-row-gap: 15%;
+    border: #000;
+    border-style: solid;
+    width: 80%;
+}
+
+#course-list {
+    grid-row-gap: 100%;
+}
+.course-list-element {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+}
+
+input {
+	background-color: #fafafa;
+    border: none;
+    width: 80%;
+    font-size: 100%;
+}
+
+
+/* #professor-dropdown {
+    background-color: lawngreen;
+    display: block;
+    display: flex;
+    flex-direction: row;
+} */
+
+#professor-dropdown-item {
+}
+
+.professor-button {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/*
+#profSelector {
+    background-color: blue;
+    display: flex; 
+    flex-direction: column;
+
+    border-radius: 4%;s
+    border: none;
+    background: none;
+    color: #000;
+    font-weight: normal;
+    font-size: 100%;
+    width: 100%;
+    
+} */
+
+
+/* button {
+	border-radius: 20px;
+	border: 1px solid #FF4B2B;
+	background-color: #FF4B2B;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+} */
+
+
+
+/* button {
+    display: flex;
+    flex-direction: row;
+
+} */
+
+/* button {
+	border-radius: 0%;
+	border: 0%;
+	background-color: #CCC;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+} */
+
+
+ul {
+    list-style-type:decimal-leading-zero;
+  }
+
+  .course-selection-page {
+      display: flex;
+      flex-direction: column;
+  }
+
+   /* The alert message box */
+.alert {
+    padding: 3%;
+    background-color: #f44336; /* Red */
+    color: white;
+    
+    margin-bottom: 2%;
+    width: 80%;
+  }
+  
+  /* The close button */
+  .closebtn {
+    margin-left: 3%;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 150%;
+    line-height: 11%;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0%;
+    border-color: #000;
+    /* background-color: #ccc; */
+  }
+  
+  /* When moving the mouse over the close button */
+  .closebtn:hover {
+    color: black;
+  } 
