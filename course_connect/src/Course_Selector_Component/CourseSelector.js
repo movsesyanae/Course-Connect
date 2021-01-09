@@ -45,7 +45,7 @@ const CourseSelector = () => {
                 <legend> Your Classes </legend>
                 <ul>
                     <h3 className = 'course-list-element' id>
-                       <div> Course ID </div>
+                       <div id='courseLabel'> Course ID </div>
                        <div> Professor</div>  
                     </h3>
                     {courseList.map( (tempCourse) => {
@@ -187,7 +187,7 @@ const CourseSelector = () => {
         <div className = 'course-selection-page'>
 
             {courseList.length > 0 ? <ShowCourseList /> : null}
-            <fieldset className = 'course-input-package'>
+            <fieldset className = 'course-input-package' id = 'class-selector'>
                 <legend> Add a course </legend>
                 
                 <div className = 'course-inputs'>

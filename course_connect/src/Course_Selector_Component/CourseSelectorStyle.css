@@ -7,25 +7,32 @@
     grid-column-gap: 3%;
 }
 
+
+
 .course-input-package {
     background-color: #eee;
-    margin: 5%;
-    padding: 7%;
-    padding-top: 4%;
+    margin: auto;
+    /* margin-top: 5%; */
+    margin-bottom: 5%;
+    padding: 4%;
+    padding-top: 2%;
     
     /* width: 100%; */
-    border-radius: 4%;
+    /* border-radius: 10px; */
+    border-radius: 1em; 
+
     
 	display: grid;
     /* grid-template-rows: 1fr 1fr; */
-    grid-row-gap: 15%;
+    /* grid-row-gap: 15%; */
     border: #000;
     border-style: solid;
     width: 80%;
 }
 
 #course-list {
-    grid-row-gap: 100%;
+    /* grid-row-gap: 100%; */
+    margin-top: -10px;
 }
 .course-list-element {
     display: grid;
@@ -40,20 +47,48 @@ input {
     font-size: 100%;
 }
 
+#class-selector {
+    /* position: absolute;
+    margin: auto; */
+}
 
-/* #professor-dropdown {
-    background-color: lawngreen;
-    display: block;
-    display: flex;
-    flex-direction: row;
-} */
+#professor-dropdown {
+    background-color: #ccc;
+    color: black;
+    border-radius: 0px;
+    border-color: black;
+    border-width: 4px;
+    border-top: none;
+    /* width: 7vw; */
+    margin: auto;
+}
 
 #professor-dropdown-item {
+    background-color: #ccc;
+    color: black;
+    border-radius: 0px;
+    border-color: black;
+    border-width: 4px;
+    border-top: none;
+    /* width: 10vw; */
+    /* margin: auto; */
+    /* width: auto; */
+    /* left: 0px;
+    right: 0px;
+    bottom: 0px;
+    top: 0px;
+    margin: auto; */
 }
 
 .professor-button {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    /* flex-direction: column; */
+    margin: auto;
+    width: 5vmax;
+}
+
+#courseLabel {
+    margin-left: -17%;
 }
 
 
@@ -116,31 +151,47 @@ ul {
   .course-selection-page {
       display: flex;
       flex-direction: column;
+
+
+  }
+
+  .course-id-input {
+      border: 2px solid black;
+      background-color: black;
   }
 
    /* The alert message box */
 .alert {
-    padding: 3%;
-    background-color: #f44336; /* Red */
+    /* padding: 3%;
     color: white;
-    
-    margin-bottom: 2%;
+    margin: auto;
     width: 80%;
+    border-radius: 10px; */
+
+
+    /* box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); */
+    border-radius: 10px;
+    /* margin-top: 5%; */
+    padding: 20px;
+    background-color: #f44336DD;
+    /* border-color: black;
+    border-style:solid; */
+    color: white;
+    margin: auto;
+    width: 80%;
+    margin-bottom: 15px;
   }
   
   /* The close button */
   .closebtn {
-    margin-left: 3%;
     color: white;
     font-weight: bold;
     float: right;
     font-size: 150%;
-    line-height: 11%;
     cursor: pointer;
     transition: 0.3s;
     border-radius: 0%;
     border-color: #000;
-    /* background-color: #ccc; */
   }
   
   /* When moving the mouse over the close button */
