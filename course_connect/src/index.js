@@ -8,9 +8,9 @@ import CourseSelector from './Course_Selector_Component/CourseSelector';
 ReactDOM.render(
   <React.StrictMode>
 
-    {/* <SignUpSliderComponent /> */}
+    <SignUpSliderComponent />
 
-	<CourseSelector />
+	{/* <CourseSelector /> */}
 
     
 

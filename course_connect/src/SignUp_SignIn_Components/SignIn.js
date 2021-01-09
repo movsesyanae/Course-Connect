@@ -13,10 +13,11 @@ const SignIn = () => {
 
 
     return (
-        <div class="form-container sign-in-container">
-        <form action = '#'>
-            <h1>Sign in</h1>
+        <div className="entry-page form-container sign-in-container">
+        <form action = '#' className="entry-page">
+            <h1 className="entry-page">Sign in</h1>
                 <input 
+                    className="entry-page"
                     type = 'text' 
                     id = 'email' 
                     placeholder = 'email'
@@ -26,6 +27,7 @@ const SignIn = () => {
                 /> 
 
                 <input 
+                    className="entry-page"
                     type = 'password' 
                     id = 'password' 
                     placeholder ='password'
@@ -34,7 +36,7 @@ const SignIn = () => {
                     onChange = {(e) => setPassword(e.target.value)} 
                 />
 
-                <button type = 'submit' onClick = { (e) => {e.preventDefault(); console.log(email, password)} }> Login </button>
+                <button className="entry-page" type = 'submit' onClick = { (e) => {e.preventDefault(); console.log(email, password)} }> Login </button>
            </form>
         </div>
     );

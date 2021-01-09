@@ -64,9 +64,10 @@ const SignUp = props => {
     const NonBinary = () => {
         if (other == true) {
             return (
-                    <div id='nonBinaryBox'>
+                    <div className="entry-page" id='nonBinaryBox'>
                     {/* <label htmlFor = "nonBinary"> Confirm Gender : </label> */}
                     <input 
+                        className="entry-page"
                         type = 'text' 
                         id = 'nonBinary'
                         key = 'nonBinary'
@@ -84,12 +85,13 @@ const SignUp = props => {
     }
 
     return (
-        <div className="form-container sign-up-container" id='sign-up-form'>
-        <form action = "#">
-                <div id='signUpLabel'>
-                <h1>Sign Up</h1>
+        <div className="entry-page form-container sign-up-container" id='sign-up-form'>
+        <form action = "#" className="entry-page">
+                <div className="entry-page" id='signUpLabel'>
+                <h1 className="entry-page">Sign Up</h1>
                 </div>
                 <input 
+                    className="entry-page"
                     type = 'text' 
                     id = 'name' 
                     name = 'name'
@@ -100,6 +102,7 @@ const SignUp = props => {
                 /> 
 
                 <input 
+                    className="entry-page"
                     type = 'text' 
                     id = 'email' 
                     name = 'email'
@@ -109,6 +112,7 @@ const SignUp = props => {
                 />
 
                 <input 
+                    className="entry-page"
                     type = 'password' 
                     id = 'password' 
                     name = 'password'
@@ -118,6 +122,7 @@ const SignUp = props => {
                 />
 
                 <input 
+                    className="entry-page"
                     type = 'password' 
                     placeholder = 'confirm password'
                     id = 'confirm password' 
@@ -126,51 +131,51 @@ const SignUp = props => {
                     onChange = {(e) => setConfirmPassword(e.target.value)} 
                 />
 
-                <div className = 'gender-selection-container'>
+                <div className = 'entry-page gender-selection-container'>
 
-                    <label htmlFor = "gender" id="genderLabel"> Gender</label>
-                    <div class="gender-buttons">
-                        <div id = "gb1">
-                            <input type = 'radio' onClick = {() => {setMale(true); setFemale(false); setOther(false);}} id = 'male' name = 'gender' value = '0' />
-                            <label htmlFor = 'male'> Male </label>
+                    <label className="entry-page" htmlFor = "gender" id="genderLabel"> Gender</label>
+                    <div className="entry-page gender-buttons">
+                        <div className="entry-page" id = "gb1">
+                            <input className="entry-page" type = 'radio' onClick = {() => {setMale(true); setFemale(false); setOther(false);}} id = 'male' name = 'gender' value = '0' />
+                            <label className="entry-page" htmlFor = 'male'> Male </label>
                         </div>
-                        <div id = "gb2">
-                            <input type = 'radio' onClick = {() => {setMale(false); setFemale(true); setOther(false);}} id = 'female' name = 'gender' value = '1' />
-                            <label htmlFor = 'female'> Female </label>
+                        <div className="entry-page" id = "gb2">
+                            <input className="entry-page" type = 'radio' onClick = {() => {setMale(false); setFemale(true); setOther(false);}} id = 'female' name = 'gender' value = '1' />
+                            <label className="entry-page" htmlFor = 'female'> Female </label>
                         </div>
-                        <div id = "gb3">
-                            <input type = 'radio' onClick = {() => {setMale(false); setFemale(false); setOther(true); }} id = 'other' name = 'gender' value = '2' />
-                            <label htmlFor = 'other'> Other </label>
+                        <div className="entry-page" id = "gb3">
+                            <input className="entry-page" type = 'radio' onClick = {() => {setMale(false); setFemale(false); setOther(true); }} id = 'other' name = 'gender' value = '2' />
+                            <label className="entry-page" htmlFor = 'other'> Other </label>
                         </div>
 
                     </div>
                         
-                    <NonBinary key = 'pls'/> 
+                    <NonBinary className="entry-page"/> 
                 </div>
 
             
 
                 
-                <div className = 'looking-for-container'>
+                <div className = 'entry-page looking-for-container'>
                 
-                    <label> I'm looking for a... </label>
-                    <div className = 'looking-for-buttons'>
+                    <label className="entry-page"> I'm looking for a... </label>
+                    <div className = 'entry-page looking-for-buttons'>
 
 
 
-                        <div>
-                            <input type = 'checkbox' onClick = {() => {setStudyBuddy( !studyBuddy)}} id = 'study buddy' name = 'study buddy' value = '0'/>
-                            <label htmlFor = 'study buddy' >Study buddy</label> 
+                        <div className="entry-page">
+                            <input className="entry-page" type = 'checkbox' onClick = {() => {setStudyBuddy( !studyBuddy)}} id = 'study buddy' name = 'study buddy' value = '0'/>
+                            <label className="entry-page" htmlFor = 'study buddy' >Study buddy</label> 
                         </div>
 
-                        <div>
-                            <input type = 'checkbox' onClick = {() => {setFriend(!friend)}} id = 'friend' name = 'friend' value = '1'/>
-                            <label htmlFor = 'friend'>friend</label> 
+                        <div className="entry-page">
+                            <input className="entry-page"type = 'checkbox' onClick = {() => {setFriend(!friend)}} id = 'friend' name = 'friend' value = '1'/>
+                            <label className="entry-page" htmlFor = 'friend'>friend</label> 
                         </div>
 
-                        <div>
-                            <input type = 'checkbox' onClick = {() => {setSex(!sex)}} id = 'sex' name = 'sex' value = '2'/>
-                            <label htmlFor = 'sex'>friend ;)</label>
+                        <div className="entry-page">
+                            <input className="entry-page" type = 'checkbox' onClick = {() => {setSex(!sex)}} id = 'sex' name = 'sex' value = '2'/>
+                            <label className="entry-page" htmlFor = 'sex'>friend ;)</label>
                         </div>
                         
         
@@ -180,9 +185,9 @@ const SignUp = props => {
 
 
             
-            <div className = 'sign-up-button'>
+            <div className = 'entry-page sign-up-button'>
 
-                <button type = 'submit' onClick = { (e) => {submitHandler(e);} }> Sign Up </button>
+                <button className="entry-page" type = 'submit' onClick = { (e) => {submitHandler(e);} }> Sign Up </button>
             </div>
             {console.log(document.activeElement)}
         </form>

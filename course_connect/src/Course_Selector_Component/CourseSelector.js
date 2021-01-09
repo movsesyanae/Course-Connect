@@ -184,7 +184,7 @@ const CourseSelector = () => {
 
 
     return (
-        <div className = 'course-selection-page'>
+        <body className = 'course-selection-page'>
 
             {courseList.length > 0 ? <ShowCourseList /> : null}
             <fieldset className = 'course-input-package' id = 'class-selector'>
@@ -220,7 +220,7 @@ const CourseSelector = () => {
             
 
 
-        </div>
+        </body>
     
 
     );
