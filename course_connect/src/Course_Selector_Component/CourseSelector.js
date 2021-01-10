@@ -41,17 +41,17 @@ const CourseSelector = () => {
 
     const ShowCourseList = () => {
         return (
-            <fieldset className = 'course-input-package' id = 'course-list'>
+            <fieldset className = 'course-selection-page course-display-package' id = 'course-list'>
                 <legend> Your Classes </legend>
-                <ul>
+                <ul className = 'course-display-package'>
                     <h3 className = 'course-list-element' id>
-                       <div id='courseLabel'> Course ID </div>
+                       <div id='course-label'> Course ID </div>
                        <div> Professor</div>  
                     </h3>
                     {courseList.map( (tempCourse) => {
                         return (
-                            <li> 
-                                <div className = 'course-list-element'>
+                            <li className = 'course-list-element'> 
+                                <div id = 'course-list-element'>
                                     <div>
                                         {tempCourse.id} 
                                     </div>
@@ -59,10 +59,10 @@ const CourseSelector = () => {
                                         {tempCourse.prof} 
                                     </div>
                                     <div>
-                                        <button className = 'close' onClick = {(e) => removeCourse(tempCourse)}  /> 
+                                        <button className = 'remove-class-btn' onClick = {(e) => removeCourse(tempCourse)}>&times;</button> 
                                     </div>
+                                </div> 
 
-                                </div>
                             </li>);
                     })} 
 
@@ -79,8 +79,8 @@ const CourseSelector = () => {
     const CreateProfessorDropdown = () => {
         const profList = getProfessorList(course.id);
         return (
-            <div> 
-                <label htmlFor = 'profSelector'> Select your professor</label>
+            <div className = 'dropdown-package'> 
+                <label htmlFor = 'profSelector' id = 'professor-label'> Professor:</label>
                 <DropdownButton 
                     drop = 'down' 
                     id = 'professor-dropdown' 
@@ -90,18 +90,18 @@ const CourseSelector = () => {
                     className = 'professor-button'
                     alignRight >
 
-                <div className = 'grace-pls'>
-                {profList.map( (profName) => {
-                    return(
-                        <Dropdown.Item 
-                            name = {profName}
-                            id = 'professor-dropdown-item'
-                            as = 'button'
-                            className = 'professor-button'
-                            onClick = {updateProfessor} > {profName} </Dropdown.Item>
-                    );
-                } )}
-            </div>
+                    <div className = 'grace-pls'>
+                        {profList.map( (profName) => {
+                            return(
+                                <Dropdown.Item 
+                                    name = {profName}
+                                    id = 'professor-dropdown-item'
+                                    as = 'button'
+                                    className = 'professor-button'
+                                    onClick = {updateProfessor} > {profName} </Dropdown.Item>
+                            );
+                        } )}
+                    </div>
                 </DropdownButton>
             </div>
         );
@@ -188,11 +188,12 @@ const CourseSelector = () => {
         
 
             {courseList.length > 0 ? <ShowCourseList /> : null}
-            <fieldset className = 'course-input-package' id = 'class-selector'>
+            <fieldset className = 'course-input-package course-selection-page' id = 'class-selector'>
                 <legend> Add a course </legend>
                 
                 <div className = 'course-inputs'>
-                    <div>
+                    
+                    <div className = 'course-id-input'>
                         <label htmlFor = "course-id-input"> Course: </label>
                         <input 
                             type = "text" 
@@ -207,12 +208,13 @@ const CourseSelector = () => {
                             }
                         /> 
                     </div>
-                    { valid == true ? <CreateProfessorDropdown /> : null }
+                    
+                    { valid ? <CreateProfessorDropdown /> : null }
 
                 </div>
 
                 <div>
-                    <button type = 'submit' onClick = {addCourse}> Add Class </button>
+                    <button className = 'add-class-btn' type = 'submit' onClick = {addCourse}> Add Class </button>
                 </div> 
                 
 

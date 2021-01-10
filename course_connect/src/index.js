@@ -11,11 +11,10 @@ ReactDOM.render(
 
     {/* <SignUpSliderComponent /> */}
 
-    {isMobile ? <SignUp_SignIn_Component_Mobile/> : <SignUpSliderComponent />}
+    {/* {isMobile ? <SignUp_SignIn_Component_Mobile/> : <SignUpSliderComponent />} */}
 
-	{/* <CourseSelector /> */}
+	  <CourseSelector />
 
-    {/* <OnStart/> */}
 
   </React.StrictMode>,
   document.getElementById('root')
