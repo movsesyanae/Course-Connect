@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import SignIn from './SignIn'
-import './SignInStyle.css'
+import './SignInStyleMobile.css'
 import SignUp from './SignUp'
 
 const SignUp_SignIn_Component_Mobile = () => {
@@ -8,10 +8,12 @@ const SignUp_SignIn_Component_Mobile = () => {
 	
 
     return(
-		<body className = 'entry-page'>
-			<p>pls</p>
-		</body>
-
+			<div className = 'entry-mobile page-container'>
+				<div className = 'entry-mobile grid-unit'></div>
+				<div className = 'entry-mobile grid-unit'></div>
+				<div className = 'entry-mobile grid-unit'></div>
+				<div className = 'entry-mobile grid-unit'></div>
+			</div> 
     );
 }
 

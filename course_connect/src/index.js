@@ -11,7 +11,7 @@ ReactDOM.render(
 
     {/* <SignUpSliderComponent /> */}
 
-    {isMobile ? <body> <h1> Grace please</h1></body> : <SignUpSliderComponent />}
+    {isMobile ? <SignUp_SignIn_Component_Mobile/> : <SignUpSliderComponent />}
 
 	{/* <CourseSelector /> */}
 
