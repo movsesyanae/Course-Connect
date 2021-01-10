@@ -184,7 +184,8 @@ const CourseSelector = () => {
 
 
     return (
-        <body className = 'course-selection-page'>
+        <main className = 'course-selection-page'>
+        
 
             {courseList.length > 0 ? <ShowCourseList /> : null}
             <fieldset className = 'course-input-package' id = 'class-selector'>
@@ -196,11 +197,12 @@ const CourseSelector = () => {
                         <input 
                             type = "text" 
                             id = 'course-id-input' 
-                            name = 'course' 
+                            name = 'course'
+                            className = 'course-selection-page' 
                             value = {course.id}
                             onChange = {(e) => {
-                                checkCourseValid(e.target.value); 
-                                setCourse({ id: e.target.value, prof: 'Select Professor' });
+                                checkCourseValid(e.target.value.toUpperCase()); 
+                                setCourse({ id: e.target.value.toUpperCase(), prof: 'Select Professor' });
                             }
                             }
                         /> 
@@ -220,7 +222,7 @@ const CourseSelector = () => {
             
 
 
-        </body>
+        </main>
     
 
     );

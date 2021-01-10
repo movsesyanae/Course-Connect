@@ -25,7 +25,7 @@ const SignUp_SignIn_Component = () => {
 	}
 
     return(
-		<body className = 'entry-page'>
+		<main className = 'entry-page'>
         <div class = "entry-page container" id = "container">
 		
 			<SignIn className="entry-page" />
@@ -49,7 +49,7 @@ const SignUp_SignIn_Component = () => {
 		</div>
 
 		<ErrorBox/>
-		</body>
+		</main>
 
     );
 }
