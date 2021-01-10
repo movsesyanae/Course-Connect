@@ -44,7 +44,7 @@ fieldset.course-selection-page {
     border-style: solid;
     border-radius: 1vmin;
     border-color: black;
-    margin-top: 14em;
+    margin-top: 12.5em;
     margin-bottom: 1em;
     
     
@@ -131,7 +131,12 @@ input.course-selection-page {
 
 #professor-dropdown-item {
     font-size: 0.6em;
-    /* width: 100%; */
+    width: 15.1em;
+    /* border: solid; */
+    /* border-color: #f44336DD; */
+    /* width: 40em; */
+    /* margin-right: 100%; */
+    /* margin-left: -8em; */
 }
 
 .professor-button {
@@ -169,7 +174,7 @@ button.add-class-btn:focus {
 
 fieldset.course-display-package {
     margin-top: 5em;
-    margin-bottom: -13em;
+    margin-bottom: -11.5em;
 }
 
 
@@ -178,7 +183,7 @@ ul.course-display-package {
     list-style-type:decimal-leading-zero;
     font-size: 0.7em;
     margin-top: -1em;
-    margin-bottom: -2em;
+    /* margin-bottom: -2em; */
     margin-left: -20;
 }
 
