@@ -9,11 +9,11 @@ import {isMobile} from 'react-device-detect';
 ReactDOM.render(
   <React.StrictMode>
 
-    {/* <SignUpSliderComponent /> */}
+    <SignUpSliderComponent />
 
     {/* {isMobile ? <SignUp_SignIn_Component_Mobile/> : <SignUpSliderComponent />} */}
 
-	  <CourseSelector />
+	  {/* <CourseSelector /> */}
 
 
   </React.StrictMode>,

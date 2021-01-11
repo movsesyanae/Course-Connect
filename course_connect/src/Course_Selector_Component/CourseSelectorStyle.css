@@ -99,7 +99,7 @@ fieldset.course-selection-page {
     border-radius: 1vmin;
     border-color: black;
     margin-top: 12.5em;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
     
     
 
@@ -255,7 +255,7 @@ h3.course-list-element {
 
 li.course-list-element {
     display: list-item;
-    /* margin-bottom: 0.5em; */
+    margin-top: 0.5em;
     /* margin-left: 1em; */
 
 }
@@ -306,7 +306,9 @@ button.remove-class-btn:hover {
 
 
 
-
+#submit-courses-btn {
+    margin-bottom: 1em;
+}
 
 
 

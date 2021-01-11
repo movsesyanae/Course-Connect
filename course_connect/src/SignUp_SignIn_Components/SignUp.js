@@ -57,6 +57,49 @@ const SignUp = props => {
         }
 
         
+        createJSON();
+
+        
+
+        
+    }
+
+      
+
+    const createJSON = () => {
+
+
+        // const id = stringToHash(email);
+
+        // const passHash = stringToHash(password);
+
+        const crypto = require('crypto'); 
+
+        const hash = crypto.createHash('sha256');
+
+        const id = hash.update('email', 'binary').digest('hex');
+
+        const passHash = hash.update('password', 'binary').digest('hex');
+
+        // get gender
+        let gender = '';
+        if (male) gender = 'male';
+        else if (female) gender = 'female';
+        else gender = nonBinary;
+
+        // get enum looking for list
+        let lookingForList = []
+        if(studyBuddy) lookingForList.push(1);
+        if(friend) lookingForList.push(2);
+        if(sex) lookingForList.push(3);
+
+        const user = {id: id, passHash: passHash};
+
+
+
+        const grace = {user: user, name: name, gender: gender, lookingForList: lookingForList, verified: false, action: 0};
+        console.log(grace);
+        
     }
     
 

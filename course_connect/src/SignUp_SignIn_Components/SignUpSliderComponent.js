@@ -4,31 +4,30 @@ import './SignInStyle.css'
 import SignUp from './SignUp'
 
 const SignUp_SignIn_Component = () => {
-	const [signUpFailMessage, setsignUpFailMessage] = useState('');
+	const [failMessage, setFailMesssage] = useState('');
+	const [signInFailMessage, setSignInFailMessage] = useState('');
 
 	const errorHandler = (value) => {
-		setsignUpFailMessage(value); 
-		console.log(signUpFailMessage);
+		setSignInFailMessage(value); 
+		// console.log(failMessage);
 	}
 
 	const ErrorBox = () => {
-		console.log(signUpFailMessage);
-			if(signUpFailMessage != '') {
-				return (
-					<div className="entry-page" id = 'ErrorBox'>
-  						<span className="entry-pageclosebtn" onClick={() => setsignUpFailMessage('')}>&times;</span> 
-							{signUpFailMessage}
-					</div>
-				);
-			}
-			return(<></>);
+		if(signInFailMessage != '') {
+			return (
+				<div className="entry-page" id = 'ErrorBox'>
+					<span className="entry-pageclosebtn" onClick={() => setSignInFailMessage('')}>&times;</span> 
+						{signInFailMessage}
+				</div>
+			);
+		} else return(<></>);
 	}
 
     return(
 		<main className = 'entry-page'>
         <div class = "entry-page container" id = "container">
 		
-			<SignIn className="entry-page" />
+			<SignIn className="entry-page" failMessage = {(value) => errorHandler(value)}/>
 			<SignUp className="entry-page" failMessage = {(value) => errorHandler(value)}/>
 			
 

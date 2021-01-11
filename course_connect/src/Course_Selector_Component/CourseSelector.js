@@ -21,6 +21,16 @@ const CourseSelector = () => {
     // 2 - professor isn't selected
     // 3 - max number of courses already added
 
+
+    const getUserObject = () => {
+        return ({id: 1234, passHash: 4321});
+    }
+
+    const createJSON = () => {
+        const pls = {user: getUserObject(), courseList: courseList, action: 3};
+        console.log(pls);
+    }
+
     const updateProfessor = (e) => {
         setCourse({ ...course, prof: e.target.name});
     }
@@ -214,13 +224,17 @@ const CourseSelector = () => {
                 </div>
 
                 <div>
-                    <button className = 'add-class-btn' type = 'submit' onClick = {addCourse}> Add Class </button>
+                    <button className = 'add-class-btn' type = 'submit' onClick = {(e) => {addCourse();}}> Add Class </button>
                 </div> 
                 
 
             </fieldset>
+
+            <button className = 'add-class-btn' id = 'submit-courses-btn' type = 'submit' onClick = {(e) => {createJSON();}}> Submit Class List </button>
+            
             
             {errorCode !== 0 ? <DisplayErrorMessage /> : null}
+
             
 
 
