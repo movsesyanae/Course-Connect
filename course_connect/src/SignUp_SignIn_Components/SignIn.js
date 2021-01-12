@@ -42,30 +42,34 @@ const SignIn = (props) => {
         }
 
         
-        createJSON();
+        const requestJSON = createRequestJSON();
+
+        //check servers return here
+
+
+        // once ready to move to next screen
+        const user = createUser();
+
+        props.user(user);
+        props.verified(true);
     }
 
-
-    const createJSON = () => {
-
-
-        // const id = stringToHash(email);
-
-        // const passHash = stringToHash(password);
-
+    const createUser = () => {
         const crypto = require('crypto'); 
-
         const hash = crypto.createHash('sha256');
-
         const id = hash.update('email', 'binary').digest('hex');
-
         const passHash = hash.update('password', 'binary').digest('hex');
+        // const user = {id: id, passHash: passHash};
+        const user = {id: email, passHash: password};
+        return user;
 
-        const user = {id: id, passHash: passHash};
+    }
 
+    const createRequestJSON = () => {
+        const user = createUser(); 
         const grace = {user: user, action: 1};
         console.log(grace);
-        
+        return grace;
     }
 
     return (

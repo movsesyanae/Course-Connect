@@ -3,7 +3,7 @@ import SignIn from './SignIn'
 import './SignInStyle.css'
 import SignUp from './SignUp'
 
-const SignUp_SignIn_Component = () => {
+const SignUp_SignIn_Component = (props) => {
 	const [failMessage, setFailMesssage] = useState('');
 	const [signInFailMessage, setSignInFailMessage] = useState('');
 
@@ -23,12 +23,16 @@ const SignUp_SignIn_Component = () => {
 		} else return(<></>);
 	}
 
+
     return(
 		<main className = 'entry-page'>
         <div class = "entry-page container" id = "container">
 		
-			<SignIn className="entry-page" failMessage = {(value) => errorHandler(value)}/>
-			<SignUp className="entry-page" failMessage = {(value) => errorHandler(value)}/>
+			<SignIn className="entry-page" failMessage = {(value) => errorHandler(value)} 
+				user = {(user) => props.user(user)} verified = {(value) => props.verified(value)} />
+			<SignUp className="entry-page" failMessage = {(value) => errorHandler(value)}
+				user = {(user) => props.user(user)} verified = {(value) => props.verified(value)}
+			/>
 			
 
 			<div className="entry-page overlay-container">

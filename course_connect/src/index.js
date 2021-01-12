@@ -5,14 +5,20 @@ import SignUpSliderComponent from './SignUp_SignIn_Components/SignUpSliderCompon
 import SignUp_SignIn_Component_Mobile from './SignUp_SignIn_Components/SignUpSliderComponentMobile';
 import CourseSelector from './Course_Selector_Component/CourseSelector';
 import {isMobile} from 'react-device-detect';
-import SignUpComplete from './SignUp_SignIn_Components/SignUpComplete'
+import SignUpComplete from './SignUp_SignIn_Components/SignUpComplete';
+import CreateRouter from './CreateRouter';
+import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from 'react-router-dom';
+
 
 ReactDOM.render(
   <React.StrictMode>
 
-    <SignUpSliderComponent />
+    {/* <SignUpSliderComponent /> */}
 
-    <SignUpComplete />
+    {/* <SignUpComplete /> */}
+    <Router>
+      <CreateRouter />
+    </Router>
 
 	  {/* <CourseSelector /> */}
 
