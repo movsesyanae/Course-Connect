@@ -14,24 +14,53 @@ const SignUp_SignIn_Component_Mobile = () => {
     const [sex, setSex] = useState(false);
     const [male, setMale] = useState(false);
     const [female, setFemale] = useState(false);
-    const [other, setOther] = useState(false);
+	const [other, setOther] = useState(false);
+	const [gender,setGender] = useState(-1);
+	const [lookingFor,setLookingFor] = useState([]);
     const [nonBinary, setNonBinary] = useState('');
-    const [signUpFailMessage, setsignUpFailMessage] = useState('');
+	const [signUpFailMessage, setsignUpFailMessage] = useState('');
 	const whereWeAt = useRef(document.getElementById('name'));
 
 	<h1 thingy='dis dick'></h1>
 
 	useEffect(() => {whereWeAt.current.focus()},[nonBinary]);
 
+	function lookingForHandler (eventValue) {
+		lookingFor = [...eventValue.target.selectedOptions].map(o => o.value);
+	}
+
+	function genderHandler (eventValue) {
+		setGender(eventValue);
+		switch(gender) {
+			case 0:
+				setMale(true); 
+				setFemale(false); 
+				setOther(false);
+				break;
+			case 1:
+				setMale(false); 
+				setFemale(true); 
+				setOther(false);
+				break;
+			case 2:
+				setMale(false); 
+				setFemale(false); 
+				setOther(true);
+				break;
+			default:
+				break;
+		}
+	}
+
 	const NonBinary = () => {
-        if (other == true) {
+        if (gender == 2) {
             return (
-                    <div className="entry-mobile">
+                    <div className="entry-mobile grid-unitx">
                     {/* <label htmlFor = "nonBinary"> Confirm Gender : </label> */}
                     <input 
                         className="entry-mobile"
                         type = 'text' 
-                        id = 'nonBinary'
+                       
                         key = 'nonBinary'
                         name = 'nonBinary'
                         placeholder = 'specify gender' 
@@ -82,7 +111,19 @@ const SignUp_SignIn_Component_Mobile = () => {
 
         
     }
-    
+	
+	const handleMult = (e) => {
+
+		var value = [];
+		var options = e.target.options;
+		for (var i = 0, l = options.length; i < l; i++) {
+			if (options[i].selected) {
+			value.push(parseInt(options[i].value));
+			}
+		}
+		setLookingFor(value);
+
+	}
 	
 
     return(
@@ -103,8 +144,8 @@ const SignUp_SignIn_Component_Mobile = () => {
 						value = {name} 
 						onChange = { (e) => setName(e.target.value) } 
 						/> 
-						<span className="entry-mobile-row"></span>
-					</div>
+					</div> 
+					
 
 					<div className = 'entry-mobile grid-unit3'>
 						<input 
@@ -143,8 +184,8 @@ const SignUp_SignIn_Component_Mobile = () => {
 					</div>
 
 					<div className = 'entry-mobile grid-unit6'>
-						<label className="entry-mobile" htmlFor = "gender" > Gender</label>
-						<div className="entry-mobile gender-buttons-mobile">
+						<label className="entry-mobile genderLabel" htmlFor = "gender" > Gender: </label>
+						{/* <div className="entry-mobile gender-buttons-mobile">
 							<div className="entry-page" id = "gb1-button">
 								<input className="entry-page" type = 'radio' onClick = {() => {setMale(true); setFemale(false); setOther(false);}} id = 'male' name = 'gender' value = '0' />
 							</div>
@@ -168,7 +209,12 @@ const SignUp_SignIn_Component_Mobile = () => {
                             <label className="entry-page" htmlFor = 'other'> Other </label>
                         	</div>
 
-                    	</div>
+                    	</div> */}
+						<select id='genderSelector' className = 'entry-mobile custom-select' name='genderSelector' value={gender} onChange = {(e) => {genderHandler(e.target.value)}} >
+							<option value='0'> Male </option>
+							<option value='1' > Female </option>
+							<option value='2' > Other </option>
+						</select>
 					</div>
 
 					<NonBinary/>
@@ -176,7 +222,7 @@ const SignUp_SignIn_Component_Mobile = () => {
 
 					<div className = 'entry-mobile grid-unit7'>
 						<label className="entry-mobile"> I'm looking for a... </label>
-						<div className = 'entry-mobile looking-for-buttons-mobile'>
+						{/* <div className = 'entry-mobile looking-for-buttons-mobile'>
 								<div  id='lfb1'>
 								<input className="entry-mobile" id='innerLfb1'  type = 'checkbox' onClick = {() => {setStudyBuddy( !studyBuddy)}}  name = 'study buddy' value = '0'/>
 								</div>
@@ -191,7 +237,12 @@ const SignUp_SignIn_Component_Mobile = () => {
 								<input className="entry-mobile" type = 'checkbox' onClick = {() => {setSex(!sex)}}  name = 'sex' value = '2'/>
 								</div>
 								<label className="entry-mobile" id = 'lfl3' htmlFor = 'sex'>friend ;)</label>
-						</div>
+						</div> */}
+						<select id='lookingForSelector'  onChange = {(e) => handleMult(e)} multiple>
+							<option value={0}> Study Buddy </option>
+							<option value={1} > Friend </option>
+							<option value={2} > Friend ;) </option>
+						</select>
 					</div>
 
 
