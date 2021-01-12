@@ -5,15 +5,16 @@ import SignUpSliderComponent from './SignUp_SignIn_Components/SignUpSliderCompon
 import SignUp_SignIn_Component_Mobile from './SignUp_SignIn_Components/SignUpSliderComponentMobile';
 import CourseSelector from './Course_Selector_Component/CourseSelector';
 import {isMobile} from 'react-device-detect';
+import SignUpComplete from './SignUp_SignIn_Components/SignUpComplete'
 
 ReactDOM.render(
   <React.StrictMode>
 
     {/* <SignUpSliderComponent /> */}
 
-    {/* {isMobile ? <SignUp_SignIn_Component_Mobile/> : <SignUpSliderComponent />} */}
+    <SignUpComplete />
 
-	  <CourseSelector />
+	  {/* <CourseSelector /> */}
 
 
   </React.StrictMode>,
