@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import './SignInStyle.css'
 
-const SignIn = () => {
+const SignIn = (props) => {
 
     // const [person, setPerson] = useState({ email: '', password: ''})
     const [email, setEmail] = useState('');
@@ -11,6 +11,62 @@ const SignIn = () => {
         
     }
 
+    function submitHandler (e) {
+        e.preventDefault();
+
+        const stringInputs = [email, password];
+
+        let submitPass = true;  //as long as true should succefully submit
+
+        if(email == '' || password == '') {
+            props.failMessage('You have not filled all fields');
+            submitPass = false;
+            return;
+        }
+
+
+        for(let x in stringInputs) { //injection prevention
+            console.log(stringInputs[x]);
+            if(stringInputs[x].includes('\'') || stringInputs[x].includes('<') || stringInputs[x].includes('>')) {
+                // props.failMessage('Your email should not include symbols such as \' or < >');
+                props.failMessage('Bru don\'t do that');
+                submitPass = false;
+                return;
+            }
+        }
+
+        if(!email.endsWith('@umd.edu')) {
+            props.failMessage('Please use your @umd.edu email');
+            submitPass = false;
+            return;
+        }
+
+        
+        createJSON();
+    }
+
+
+    const createJSON = () => {
+
+
+        // const id = stringToHash(email);
+
+        // const passHash = stringToHash(password);
+
+        const crypto = require('crypto'); 
+
+        const hash = crypto.createHash('sha256');
+
+        const id = hash.update('email', 'binary').digest('hex');
+
+        const passHash = hash.update('password', 'binary').digest('hex');
+
+        const user = {id: id, passHash: passHash};
+
+        const grace = {user: user, action: 1};
+        console.log(grace);
+        
+    }
 
     return (
         <div className="entry-page form-container sign-in-container">
@@ -36,7 +92,7 @@ const SignIn = () => {
                     onChange = {(e) => setPassword(e.target.value)} 
                 />
 
-                <button className="entry-page" type = 'submit' onClick = { (e) => {e.preventDefault(); console.log(email, password)} }> Login </button>
+                <button className="entry-page" type = 'submit' onClick = { submitHandler }> Login </button>
            </form>
         </div>
     );

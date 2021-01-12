@@ -10,7 +10,7 @@ import SignUpComplete from './SignUp_SignIn_Components/SignUpComplete'
 ReactDOM.render(
   <React.StrictMode>
 
-    {/* <SignUpSliderComponent /> */}
+    <SignUpSliderComponent />
 
     <SignUpComplete />
 
