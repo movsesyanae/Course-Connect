@@ -5,10 +5,16 @@ import SignUp_SignIn_Component_Mobile from './SignUpSliderComponentMobile';
 import {isMobile} from 'react-device-detect';
 
 
-const SignUpComplete = () => {
+const SignUpComplete = (props) => {
+
+    const handleUser = (user) => {
+		console.log('grace please');
+		console.log(user);
+	}
+
     return(
         <div>
-            {isMobile ? <SignUp_SignIn_Component_Mobile/> : <SignUpSliderComponent />}
+            {isMobile ? <SignUp_SignIn_Component_Mobile/> : <SignUpSliderComponent user = {(user) => props.user(user)} verified = {(value) => props.verified(value)}  />}
         </div>
     );
 }

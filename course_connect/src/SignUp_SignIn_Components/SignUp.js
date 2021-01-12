@@ -56,30 +56,30 @@ const SignUp = props => {
             return;
         }
 
-        
-        createJSON();
+        // Do server call here
 
+
+        // Once everything is handled
+        const user = createUser();
+        props.user(user);
+        props.verified(false);
         
 
         
     }
 
-      
-
-    const createJSON = () => {
-
-
-        // const id = stringToHash(email);
-
-        // const passHash = stringToHash(password);
-
+    const createUser = () => {
         const crypto = require('crypto'); 
-
         const hash = crypto.createHash('sha256');
-
         const id = hash.update('email', 'binary').digest('hex');
-
         const passHash = hash.update('password', 'binary').digest('hex');
+        // const user = {id: id, passHash: passHash};
+        const user = {id: email, passHash: password};
+        return user;
+    }
+
+    const createRequestJSON = () => {
+        const user = createUser(); 
 
         // get gender
         let gender = '';
@@ -93,7 +93,6 @@ const SignUp = props => {
         if(friend) lookingForList.push(2);
         if(sex) lookingForList.push(3);
 
-        const user = {id: id, passHash: passHash};
 
 
 
