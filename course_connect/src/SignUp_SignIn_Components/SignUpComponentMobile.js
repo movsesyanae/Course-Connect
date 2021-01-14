@@ -131,8 +131,8 @@ const SignUpComponentMobile = (props) => {
 
         // Once everything is handled
         const user = createUser();
-        props.user(user);
-        props.verified(false);
+		props.user(user);
+		props.nextPage(1);
         
 
         

@@ -29,9 +29,9 @@ const SignUp_SignIn_Component = (props) => {
         <div class = "entry-page container" id = "container">
 		
 			<SignIn className="entry-page" failMessage = {(value) => errorHandler(value)} 
-				user = {(user) => props.user(user)} verified = {(value) => props.verified(value)} />
+				user = {(user) => props.user(user)} nextPage = {(value) => props.nextPage(value)} />
 			<SignUp className="entry-page" failMessage = {(value) => errorHandler(value)}
-				user = {(user) => props.user(user)} verified = {(value) => props.verified(value)}
+				user = {(user) => props.user(user)} nextPage = {(value) => props.nextPage(value)}
 			/>
 			
 
