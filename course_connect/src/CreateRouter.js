@@ -7,50 +7,42 @@ import SignInComponentMobile from './SignUp_SignIn_Components/SignInComponentMob
 import CourseSelector from './Course_Selector_Component/CourseSelector';
 import Verification from './SignUp_SignIn_Components/Verification';
 import {isMobile} from 'react-device-detect';
+import MainPage from './MainPage';
 
 
 
 const CreateRouter = () => {
 
     const [user, setUser] = useState(null);
-    const [verified, setVerified] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
     const history = useHistory();
 
-    const handleAfterSignIn = (validated) => {
-        setVerified(validated);
-        console.log('Verified: ', validated);
-        if (validated) history.push('/courses');
-        else history.push('/verification');
-        // history.push("/courses");
-    }
 
     const handleNextPage = (value) => {
-        // 0 -- main page
-        // 1 -- Sign Up/In page
-        // 2 -- Verification Page
-        // 3 -- Course Selection Page
-
+        // 0 -- Sign Up/In page
+        // 1 -- Verification Page
+        // 2 -- Course Selection Page
+        // 3 -- main page
+        
         setCurrentPage(value);
 
         switch (value) {
-            case 0:
-                history.push('/main');
-                break;
-        
-            case 1:
-                history.push('/');
-                break;
-
-            case 2: 
+            
+            case 1: 
                 history.push('/verification');
                 break;
 
-            case 3:
+            case 2:
                 history.push('/courses');
                 break;
                 
+            case 3:
+                history.push('/main');
+                break;
+
             default:
+                setUser(null);
+                setCurrentPage(0);
                 history.push('/');
                 break;
         }
@@ -71,25 +63,30 @@ const CreateRouter = () => {
                 <Switch>
                     {/* <Route exact path = '/' render = {() => <SignUpSliderComponent user = {(user) => setUser(user)} verified = {(value) => handleAfterSignIn(value)}  />} />  */}
                     <Route exact path = '/'> 
-                        {isMobile ? <Redirect to = '/sign-up-mobile' /> : <SignUpSliderComponent user = {(user) => setUser(user)} verified = {(value) => handleAfterSignIn(value)}  />}
+                        {isMobile ? <Redirect to = '/sign-up-mobile' /> : <SignUpSliderComponent user = {(user) => setUser(user)} nextPage = {(value) => handleNextPage(value)}  />}
                     </Route>
                     
+                    {/* <Route exact path = '/courses' render = {() => <CourseSelector nextPage = {(value) => handleNextPage(value)} user = {user}/>}/> */}
                     <Route exact path = '/courses'> 
-                        {!user || !verified ? <Redirect to = '/' /> : <CourseSelector nextPage = {(value) => handleNextPage(value)} user = {user}/>}
+                        {!user || currentPage !== 2 ? <Redirect to = '/' /> : <CourseSelector nextPage = {(value) => handleNextPage(value)} user = {user}/>}
                     </Route>
                     
                     <Route exact path = '/verification'> 
-                        {!user || verified ? <Redirect to = '/' /> : <Verification user = {user} verified = {(value) => handleAfterSignIn(value)}/>}
+                        {!user || currentPage !== 1 ? <Redirect to = '/' /> : <Verification user = {user} nextPage = {(value) => handleNextPage(value)}/>}
                     </Route>
 
                     <Route exact path = '/sign-up-mobile'> 
                         {/* {user ? <Verification /> : <h1>damn</h1>} */}
-                        {!isMobile ? <Redirect to = '/' /> : <SignUpComponentMobile user = {(user) => setUser(user)} verified = {(value) => handleAfterSignIn(value)} />}
+                        {!isMobile ? <Redirect to = '/' /> : <SignUpComponentMobile user = {(user) => setUser(user)} nextPage = {(value) => handleNextPage(value)} />}
                     </Route>
                     
                     <Route exact path = '/sign-in-mobile'> 
                         {/* {user ? <Verification /> : <h1>damn</h1>} */}
-                        {!isMobile ? <Redirect to = '/' /> : <SignInComponentMobile user = {(user) => setUser(user)} verified = {(value) => handleAfterSignIn(value)} />}
+                        {!isMobile ? <Redirect to = '/' /> : <SignInComponentMobile user = {(user) => setUser(user)} nextPage = {(value) => handleNextPage(value)} />}
+                    </Route>
+
+                    <Route exact path = '/main'>
+                        {!user || currentPage !== 3 ? <Redirect to = '/' /> : <MainPage user = {(user) => setUser(user)} nextPage = {(value) => handleNextPage(value)} />}
                     </Route>
                 </Switch>
             {/* </Router> */}

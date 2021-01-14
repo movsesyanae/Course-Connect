@@ -60,8 +60,7 @@ const SignUp = props => {
         // Once everything is handled
         const user = createUser();
         props.user(user);
-        props.verified(false);
-        
+		props.nextPage(1);        
 
         
     }

@@ -215,19 +215,25 @@ const CourseSelector = (props) => {
         //do server call
 
         //make next page main page
-        props.nextPage(0);
+        props.nextPage(3);
     }
 
+    const ShowUser = (user) => {
+        return (
+            <div>
+                <h4>{user.id}</h4>
+                <h4>{user.passHash}</h4>
+            </div>
+        );
+    } 
 
     return (
         <body id="courseSelectorBody">
         <main className = 'course-selection-page'>
         
-
             {courseList.length > 0 ? <ShowCourseList /> : null}
             <fieldset className = 'course-input-package course-selection-page' id = 'class-selector'>
                 <legend> Add a course </legend>
-                
                 <div className = 'course-inputs'>
                     
                     <div className = 'course-id-input'>
