@@ -5,18 +5,15 @@ import './SignInStyleMobile.scss'
 import SignUp from './SignUp'
 import { BrowserRouter as Router, Switch, Route, Redirect, useHistory, Link } from 'react-router-dom';
 
-const SignUpComponentMobile = () => {
+const SignUpComponentMobile = (props) => {
 	const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [studyBuddy, setStudyBuddy] = useState(false);
-    const [friend, setFriend] = useState(false);
-    const [sex, setSex] = useState(false);
-    const [male, setMale] = useState(false);
+    const [male, setMale] = useState(true);
     const [female, setFemale] = useState(false);
 	const [other, setOther] = useState(false);
-	const [gender,setGender] = useState(-1);
+	const [gender,setGender] = useState(0);
 	const [lookingFor,setLookingFor] = useState([]);
     const [nonBinary, setNonBinary] = useState('');
 	const [signUpFailMessage, setSignUpFailMessage] = useState('');
@@ -26,24 +23,21 @@ const SignUpComponentMobile = () => {
 
 	useEffect(() => {whereWeAt.current.focus()},[nonBinary]);
 
-	function lookingForHandler (eventValue) {
-		lookingFor = [...eventValue.target.selectedOptions].map(o => o.value);
-	}
 
 	function genderHandler (eventValue) {
 		setGender(eventValue);
-		switch(gender) {
-			case 0:
+		switch(eventValue) {
+			case '0':
 				setMale(true); 
 				setFemale(false); 
 				setOther(false);
 				break;
-			case 1:
+			case '1':
 				setMale(false); 
 				setFemale(true); 
 				setOther(false);
 				break;
-			case 2:
+			case '2':
 				setMale(false); 
 				setFemale(false); 
 				setOther(true);
@@ -99,7 +93,7 @@ const SignUpComponentMobile = () => {
         let stringInputs = [name,email,password,confirmPassword,nonBinary];
         let submitPass = true;  //as long as true should succefully submit
 
-        if(name == '' || email == '' || password == '' || confirmPassword == '' ||  (!studyBuddy && !friend && !sex) || (!male && !female && !other) || (other && nonBinary == '')) {
+        if(name == '' || email == '' || password == '' || confirmPassword == '' ||  lookingFor.length === 0 || (!male && !female && !other) || (other && nonBinary == '')) {
 			// props.failMessage('You have not selected all fields');
 			setSignUpFailMessage('You have not selected all fields');
             submitPass = false;
@@ -132,8 +126,46 @@ const SignUpComponentMobile = () => {
         }
 
         
+          // Do server call here
+
+
+        // Once everything is handled
+        const user = createUser();
+        props.user(user);
+        props.verified(false);
+        
+
+        
     }
-	
+
+    const createUser = () => {
+        const crypto = require('crypto'); 
+        const hash = crypto.createHash('sha256');
+        const id = hash.update('email', 'binary').digest('hex');
+        const passHash = hash.update('password', 'binary').digest('hex');
+        // const user = {id: id, passHash: passHash};
+        const user = {id: email, passHash: password};
+        return user;
+    }
+
+    const createRequestJSON = () => {
+        const user = createUser(); 
+
+        // get gender
+        let gender = '';
+        if (male) gender = 'male';
+        else if (female) gender = 'female';
+        else gender = nonBinary;
+
+    
+
+
+
+
+        const grace = {user: user, name: name, gender: gender, lookingForList: lookingFor, verified: false, action: 0};
+        console.log(grace);
+        
+    }
 	const handleMult = (e) => {
 
 		var value = [];

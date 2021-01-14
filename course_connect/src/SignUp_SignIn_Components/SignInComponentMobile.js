@@ -5,7 +5,7 @@ import './SignInStyleMobile.scss'
 import SignUp from './SignUp'
 import { BrowserRouter as Router, Switch, Route, Redirect, useHistory, Link } from 'react-router-dom';
 
-const SignUpComponentMobile = () => {
+const SignUpComponentMobile = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 	const [signUpFailMessage, setSignUpFailMessage] = useState('');
@@ -56,10 +56,33 @@ const SignUpComponentMobile = () => {
         }
 
 
-        
+          //check servers return here
+
+
+        // once ready to move to next screen
+        const user = createUser();
+
+        props.user(user);
+        props.verified(true);
     }
-	
-	
+
+    const createUser = () => {
+        const crypto = require('crypto'); 
+        const hash = crypto.createHash('sha256');
+        const id = hash.update('email', 'binary').digest('hex');
+        const passHash = hash.update('password', 'binary').digest('hex');
+        // const user = {id: id, passHash: passHash};
+        const user = {id: email, passHash: password};
+        return user;
+
+    }
+
+    const createRequestJSON = () => {
+        const user = createUser(); 
+        const grace = {user: user, action: 1};
+        console.log(grace);
+        return grace;
+    }
 	
 
     return(

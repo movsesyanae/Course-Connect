@@ -18,7 +18,6 @@ const CreateRouter = () => {
 
     const handleAfterSignIn = (validated) => {
         setVerified(validated);
-        console.log('User: ', user);
         console.log('Verified: ', validated);
         if (validated) history.push('/courses');
         else history.push('/verification');
@@ -36,23 +35,27 @@ const CreateRouter = () => {
 
             {/* <Router> */}
                 <Switch>
+                    {/* <Route exact path = '/' render = {() => <SignUpSliderComponent user = {(user) => setUser(user)} verified = {(value) => handleAfterSignIn(value)}  />} />  */}
                     <Route exact path = '/'> 
-                        {isMobile ? <Redirect to = '/sign-up-mobile' /> : <SignUpSliderComponent user = {(user) => setUser(user)} verified = {(value) => setVerified(value)}  />}
+                        {isMobile ? <Redirect to = '/sign-up-mobile' /> : <SignUpSliderComponent user = {(user) => setUser(user)} verified = {(value) => handleAfterSignIn(value)}  />}
                     </Route>
+                    
                     <Route exact path = '/courses'> 
-                        {!user || !verified ? <Redirect to = '/' /> : <CourseSelector />}
+                        {!user || !verified ? <Redirect to = '/' /> : <CourseSelector nextPage = {(value) => handleNextPage(value)} user = {user}/>}
                     </Route>
+                    
                     <Route exact path = '/verification'> 
-                        {/* {user ? <Verification /> : <h1>damn</h1>} */}
-                        {!user || verified ? <Redirect to = '/' /> : <Verification />}
+                        {!user || verified ? <Redirect to = '/' /> : <Verification user = {user} verified = {(value) => handleAfterSignIn(value)}/>}
                     </Route>
+
                     <Route exact path = '/sign-up-mobile'> 
                         {/* {user ? <Verification /> : <h1>damn</h1>} */}
-                        {!isMobile ? <Redirect to = '/' /> : <SignUpComponentMobile />}
+                        {!isMobile ? <Redirect to = '/' /> : <SignUpComponentMobile user = {(user) => setUser(user)} verified = {(value) => handleAfterSignIn(value)} />}
                     </Route>
+                    
                     <Route exact path = '/sign-in-mobile'> 
                         {/* {user ? <Verification /> : <h1>damn</h1>} */}
-                        {!isMobile ? <Redirect to = '/' /> : <SignInComponentMobile />}
+                        {!isMobile ? <Redirect to = '/' /> : <SignInComponentMobile user = {(user) => setUser(user)} verified = {(value) => handleAfterSignIn(value)} />}
                     </Route>
                 </Switch>
             {/* </Router> */}

@@ -10,7 +10,7 @@ import './CourseSelectorStyle.css'
 
 
 
-const CourseSelector = () => {
+const CourseSelector = (props) => {
 
     const [course, setCourse] = useState({id: '', prof: 'Select Professor'});
     const [valid, setValid] = useState(false);
@@ -192,6 +192,13 @@ const CourseSelector = () => {
 
     }
 
+    const handleSubmit = () => {
+        //do server call
+
+        //make next page main page
+        props.nextPage(0);
+    }
+
 
     return (
         <main className = 'course-selection-page'>
@@ -230,7 +237,7 @@ const CourseSelector = () => {
 
             </fieldset>
 
-            <button className = 'add-class-btn' id = 'submit-courses-btn' type = 'submit' onClick = {(e) => {createJSON();}}> Submit Class List </button>
+            <button className = 'add-class-btn' id = 'submit-courses-btn' type = 'submit' onClick = {(e) => {handleSubmit;}}> Submit Class List </button>
             
             
             {errorCode !== 0 ? <DisplayErrorMessage /> : null}
