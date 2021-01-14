@@ -10,8 +10,10 @@
     font-size: 1em;
 }
 
-#mobileEnterBody {
+@media only screen and (max-width: 1440px) {
+    body {
     background-color: #FF4B2B;
+    }
 }
 
 
