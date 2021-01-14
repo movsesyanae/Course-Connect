@@ -14,6 +14,7 @@ const CreateRouter = () => {
 
     const [user, setUser] = useState(null);
     const [verified, setVerified] = useState(false)
+    const [currentPage, setCurrentPage] = useState(1);
     const history = useHistory();
 
     const handleAfterSignIn = (validated) => {
@@ -22,6 +23,39 @@ const CreateRouter = () => {
         if (validated) history.push('/courses');
         else history.push('/verification');
         // history.push("/courses");
+    }
+
+    const handleNextPage = (value) => {
+        // 0 -- main page
+        // 1 -- Sign Up/In page
+        // 2 -- Verification Page
+        // 3 -- Course Selection Page
+
+        setCurrentPage(value);
+
+        switch (value) {
+            case 0:
+                history.push('/main');
+                break;
+        
+            case 1:
+                history.push('/');
+                break;
+
+            case 2: 
+                history.push('/verification');
+                break;
+
+            case 3:
+                history.push('/courses');
+                break;
+                
+            default:
+                history.push('/');
+                break;
+        }
+
+
     }
 
     return(

@@ -237,7 +237,7 @@ const CourseSelector = (props) => {
 
             </fieldset>
 
-            <button className = 'add-class-btn' id = 'submit-courses-btn' type = 'submit' onClick = {(e) => {handleSubmit;}}> Submit Class List </button>
+            <button className = 'add-class-btn' id = 'submit-courses-btn' type = 'submit' onClick = {(e) => {handleSubmit(e);}}> Submit Class List </button>
             
             
             {errorCode !== 0 ? <DisplayErrorMessage /> : null}
