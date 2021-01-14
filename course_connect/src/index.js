@@ -8,6 +8,7 @@ import {isMobile} from 'react-device-detect';
 import SignUpComplete from './SignUp_SignIn_Components/SignUpComplete';
 import CreateRouter from './CreateRouter';
 import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from 'react-router-dom';
+import SignUpComponentMobile from './SignUp_SignIn_Components/SignInComponentMobile';
 
 
 ReactDOM.render(
@@ -19,6 +20,7 @@ ReactDOM.render(
     <Router>
       <CreateRouter />
     </Router>
+  {/* <SignUp_SignIn_Component_Mobile/> */}
 
 	  {/* <CourseSelector /> */}
 

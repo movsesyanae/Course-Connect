@@ -22,6 +22,7 @@ body {
 
 
 div.entry-mobile.page-container {
+    
     display: grid;
     grid-template-rows: repeat(8, 1fr);
     /* border-style: solid;
@@ -32,7 +33,9 @@ div.entry-mobile.page-container {
     width: 95vw;
     height: 100vh; 
     margin: 0;
-    padding: 0;    
+    padding: 0;
+    padding-left: 3%;
+    // padding-bottom: 1em;    
 }
 
 h1.entry-mobile.course-connect {
@@ -48,11 +51,19 @@ div.entry-mobile.grid-unit1 {
     /* border-style: solid; */
     /* border-color: black; */
     background-color: #FF4B2B;
-    justify-content:cent;
+    justify-content:center;
     align-items: center;
     display: flex;
     padding: 0;
     margin: 0;
+
+    p {
+        padding-top: 1.5em;
+    }
+
+    #signInLink {
+        color: #BBB;
+    }
 }
 
 
@@ -258,6 +269,10 @@ div.entry-mobile.grid-unit8 {
     display: flex;
     padding: 0;
     margin: 0;
+
+    // button {
+    //     margin-bottom: 2em;
+    // }
 }
 
 
@@ -436,3 +451,27 @@ div.entry-mobile.grid-unit8 {
     border: 6px solid transparent;
     border-color: #fff transparent transparent transparent;
   }
+
+  #lookingForSelector {
+      font-size: 1em;
+      
+  }
+
+//   .entry-mobile {
+//       #errorBox {
+//           background-color: #CCC;
+//           margin:auto;
+//           padding-left: 1em;
+//           padding-right: 1em;
+//           border-radius: .5em;
+//       }
+//   }
+
+    #alert-mobile {
+        background-color: #999;
+        font-size: .8em;
+    }
+
+    .entry-mobile.grid-footer {
+        height: 1em;
+    }
