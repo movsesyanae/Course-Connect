@@ -6,23 +6,12 @@ import SignUp from './SignUp'
 import { BrowserRouter as Router, Switch, Route, Redirect, useHistory, Link } from 'react-router-dom';
 
 const SignUpComponentMobile = () => {
-	const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [studyBuddy, setStudyBuddy] = useState(false);
-    const [friend, setFriend] = useState(false);
-    const [sex, setSex] = useState(false);
-    const [male, setMale] = useState(false);
-    const [female, setFemale] = useState(false);
-	const [other, setOther] = useState(false);
-	const [gender,setGender] = useState(-1);
-	const [lookingFor,setLookingFor] = useState([]);
-    const [nonBinary, setNonBinary] = useState('');
 	const [signUpFailMessage, setSignUpFailMessage] = useState('');
 	const whereWeAt = useRef(document.getElementById('name'));
 
-	<h1 thingy='dis dick'></h1>
+
 
 
 	
@@ -46,10 +35,10 @@ const SignUpComponentMobile = () => {
 	function submitHandler (e) {
         e.preventDefault();
 
-        let stringInputs = [name,email,password,confirmPassword,nonBinary];
+        let stringInputs = [email,password];
         let submitPass = true;  //as long as true should succefully submit
 
-        if(name == '' || email == '' || password == '' || confirmPassword == '' ||  (!studyBuddy && !friend && !sex) || (!male && !female && !other) || (other && nonBinary == '')) {
+        if(email == '' || password == '') {
 			// props.failMessage('You have not selected all fields');
 			setSignUpFailMessage('You have not selected all fields');
             submitPass = false;
@@ -58,7 +47,6 @@ const SignUpComponentMobile = () => {
 		
 
         for(let x in stringInputs) { //injection prevention
-            console.log(stringInputs[x]);
             if(stringInputs[x].includes('\'') || stringInputs[x].includes('<') || stringInputs[x].includes('>')) {
 				setSignUpFailMessage('Stop hacking ;)');
                 // props.failMessage('You may not include symbols such as \' or < >');
@@ -67,19 +55,6 @@ const SignUpComponentMobile = () => {
             }
         }
 
-		if(!(password == confirmPassword)) { //FIX: passwords showing up in console
-			setSignUpFailMessage('Passwords must match!');
-            // props.failMessage('Passwords must match!');
-            submitPass = false;
-            return;
-        }
-
-        if(!email.endsWith('@umd.edu')) {
-			setSignUpFailMessage('Please use a @umd.edu email');
-            // props.failMessage('Please use a @umd.edu email');
-            submitPass = false;
-            return;
-        }
 
         
     }
@@ -92,7 +67,7 @@ const SignUpComponentMobile = () => {
 
 					<div className = 'entry-mobile grid-unit1'>
 						<h1 id='cCLabel'className = 'entry-mobile course-connect'>Course Connect</h1>
-						<p>New user? <Link to = '/signIn' id ="signInLink">Sign up</Link></p>
+						<p>New User? <Link to = '/signIn' id ="signInLink">Sign up</Link></p>
 					</div>
 
 					<ErrorPopUp/>
