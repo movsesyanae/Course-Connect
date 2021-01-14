@@ -73,6 +73,7 @@ const SignIn = (props) => {
     }
 
     return (
+        <body id='mobileEnterBody'>
         <div className="entry-page form-container sign-in-container">
         <form action = '#' className="entry-page">
             <h1 className="entry-page">Sign in</h1>
@@ -99,6 +100,7 @@ const SignIn = (props) => {
                 <button className="entry-page" type = 'submit' onClick = { submitHandler }> Login </button>
            </form>
         </div>
+        </body>
     );
 
     

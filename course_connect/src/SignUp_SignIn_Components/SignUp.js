@@ -18,8 +18,6 @@ const SignUp = props => {
     const whereWeAt = useRef(document.getElementById('name'));
 
     
-
-    
     useEffect(() => {whereWeAt.current.focus()},[nonBinary]);
 
     function submitHandler (e) {
@@ -127,6 +125,7 @@ const SignUp = props => {
     }
 
     return (
+        <body id='mobileEnterBody'>
         <div className="entry-page form-container sign-up-container" id='sign-up-form'>
         <form action = "#" className="entry-page">
                 <div className="entry-page" id='signUpLabel'>
@@ -234,6 +233,7 @@ const SignUp = props => {
             {console.log(document.activeElement)}
         </form>
         </div>
+        </body>
     );
 
     
