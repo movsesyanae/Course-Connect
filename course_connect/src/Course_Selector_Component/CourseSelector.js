@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
-import './CourseSelectorStyle.css'
+import './CourseSelectorStyle.scss'
 
 
 
@@ -32,7 +32,7 @@ const CourseSelector = (props) => {
     }
 
     const updateProfessor = (e) => {
-        setCourse({ ...course, prof: e.target.name});
+        setCourse({ ...course, prof: e.target.value});
     }
 
     const updateCourseList = () => {
@@ -91,7 +91,7 @@ const CourseSelector = (props) => {
         return (
             <div className = 'dropdown-package'> 
                 <label htmlFor = 'profSelector' id = 'professor-label'> Professor:</label>
-                <DropdownButton 
+                {/* <DropdownButton 
                     drop = 'down' 
                     id = 'professor-dropdown' 
                     // variant="secondary" 
@@ -99,6 +99,11 @@ const CourseSelector = (props) => {
                     // as = 'button'
                     className = 'professor-button'
                     alignRight >
+
+
+
+
+
 
                     <div className = 'grace-pls'>
                         {profList.map( (profName) => {
@@ -112,7 +117,21 @@ const CourseSelector = (props) => {
                             );
                         } )}
                     </div>
-                </DropdownButton>
+                </DropdownButton> */}
+
+
+                
+                <select name='professors' value={course.prof} id='professor-dropdown2' onChange = {(e) => {updateProfessor(e);}}>
+                    {
+                        profList.map( (profName) => {
+                            return(<option value={profName}>{profName}</option>);
+                        })
+                    }
+                </select>
+
+
+
+
             </div>
         );
     }
@@ -201,6 +220,7 @@ const CourseSelector = (props) => {
 
 
     return (
+        <body id="courseSelectorBody">
         <main className = 'course-selection-page'>
         
 
@@ -246,6 +266,7 @@ const CourseSelector = (props) => {
 
 
         </main>
+        </body>
     
 
     );
