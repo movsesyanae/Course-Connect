@@ -22,7 +22,7 @@ const SignUpComponentMobile = () => {
 	const [signUpFailMessage, setSignUpFailMessage] = useState('');
 	const whereWeAt = useRef(document.getElementById('name'));
 
-	<h1 thingy='dis dick'></h1>
+	useEffect(() => {window.scrollTo(0,0);},[]);
 
 	useEffect(() => {whereWeAt.current.focus()},[nonBinary]);
 
