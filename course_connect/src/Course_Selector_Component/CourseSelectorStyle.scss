@@ -50,6 +50,10 @@
         margin-bottom: 1em;
         font-size: .5em;
     }
+
+    #profSpacing {
+        margin-left: .5em;
+    }
 }
 
 @media only screen and (min-width: 1440px) {
@@ -378,3 +382,14 @@ button.remove-class-btn:hover {
 .closebtn:hover {
     color: black;
   } 
+
+  #dropdownBox {
+      margin-top: 1em;
+      font-size: 1em;
+      ::-webkit-input-placeholder {
+        color:white;
+        
+        font-size:1em;
+    }
+
+  }
