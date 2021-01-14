@@ -12,9 +12,12 @@ ReactDOM.render(
     {/* <SignUpSliderComponent /> */}
 
     {/* <SignUpComplete /> */}
+
     {/* <Router>
       <CreateRouter />
-    </Router> */}
+    </Router>
+   */}
+
   {/* <SignUp_SignIn_Component_Mobile/> */}
 
 	  <CourseSelector />

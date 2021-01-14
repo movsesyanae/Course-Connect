@@ -13,7 +13,7 @@ const Verification = (props) => {
         console.log(codeInt);
 
         // history.push('/courses');
-        props.verified(true);
+        props.nextPage(2);
     }
 
     return(
