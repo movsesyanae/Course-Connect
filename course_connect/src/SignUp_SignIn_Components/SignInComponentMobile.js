@@ -92,7 +92,7 @@ const SignUpComponentMobile = () => {
 
 					<div className = 'entry-mobile grid-unit1'>
 						<h1 id='cCLabel'className = 'entry-mobile course-connect'>Course Connect</h1>
-						<p>New user? <Link to = '/signIn' id ="signInLink">Sign up</Link></p>
+						<p>New user? <Link to = '/sign-up-mobile' id ="signInLink">Sign up</Link></p>
 					</div>
 
 					<ErrorPopUp/>
