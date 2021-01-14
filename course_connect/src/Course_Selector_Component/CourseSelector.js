@@ -12,7 +12,7 @@ import './CourseSelectorStyle.scss'
 
 const CourseSelector = (props) => {
 
-    const [course, setCourse] = useState({id: '', prof: 'Select Professor'});
+    const [course, setCourse] = useState({id: '', prof: ''});
     const [valid, setValid] = useState(false);
     const [courseList, setCourseList] = useState([]);
     const [errorCode, setErrorCode] = useState(0); 
@@ -32,6 +32,7 @@ const CourseSelector = (props) => {
     }
 
     const updateProfessor = (e) => {
+        console.log(e.target.value);
         setCourse({ ...course, prof: e.target.value});
     }
 
@@ -65,7 +66,7 @@ const CourseSelector = (props) => {
                                     <div>
                                         {tempCourse.id} 
                                     </div>
-                                    <div>
+                                    <div id='profSpacing'>
                                         {tempCourse.prof} 
                                     </div>
                                     <div>
@@ -91,43 +92,20 @@ const CourseSelector = (props) => {
         return (
             <div className = 'dropdown-package'> 
                 <label htmlFor = 'profSelector' id = 'professor-label'> Professor:</label>
-                {/* <DropdownButton 
-                    drop = 'down' 
-                    id = 'professor-dropdown' 
-                    // variant="secondary" 
-                    title = {course.prof} 
-                    // as = 'button'
-                    className = 'professor-button'
-                    alignRight >
 
+                <div id='dropdownBox'>
+                <select name='professors' value = {course.prof}  id='professor-dropdown2' onChange = {(e) => {updateProfessor(e)}}>
+                    <option  value = '' disabled selected>Please choose one</option>
 
-
-
-
-
-                    <div className = 'grace-pls'>
-                        {profList.map( (profName) => {
-                            return(
-                                <Dropdown.Item 
-                                    name = {profName}
-                                    id = 'professor-dropdown-item'
-                                    as = 'button'
-                                    className = 'professor-button'
-                                    onClick = {updateProfessor} > {profName} </Dropdown.Item>
-                            );
-                        } )}
-                    </div>
-                </DropdownButton> */}
-
-
-                
-                <select name='professors' value={course.prof} id='professor-dropdown2' onChange = {(e) => {updateProfessor(e);}}>
                     {
+                        
                         profList.map( (profName) => {
                             return(<option value={profName}>{profName}</option>);
                         })
                     }
+
                 </select>
+                </div>
 
 
 
@@ -135,6 +113,7 @@ const CourseSelector = (props) => {
             </div>
         );
     }
+
 
     const ResetProfessor = () => {
         return(null);
@@ -152,7 +131,7 @@ const CourseSelector = (props) => {
             setErrorCode(1);
         } else if (!valid) {
             setErrorCode(2);
-        } else if (course.prof === 'Select Professor') {
+        } else if (course.prof === '') {
             setErrorCode(3);
         } else if (courseList.filter((element) => element.id === course.id.toUpperCase()).length > 0) {
             setErrorCode(4);
@@ -246,7 +225,7 @@ const CourseSelector = (props) => {
                             value = {course.id}
                             onChange = {(e) => {
                                 checkCourseValid(e.target.value.toUpperCase()); 
-                                setCourse({ id: e.target.value.toUpperCase(), prof: 'Select Professor' });
+                                setCourse({ id: e.target.value.toUpperCase(), prof: '' });
                             }
                             }
                         /> 
