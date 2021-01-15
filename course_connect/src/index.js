@@ -6,7 +6,7 @@ import CreateRouter from './CreateRouter';
 import CourseSelector from './Course_Selector_Component/CourseSelector'
 import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import SignUpComponentMobile from './SignUp_SignIn_Components/SignUpComponentMobile';
-
+import VerificationPage from './SignUp_SignIn_Components/Verification';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,15 +17,18 @@ ReactDOM.render(
 
     {/* <Router>
       <CreateRouter />
-    </Router>
-   */}
+    </Router> */}
+  
+
+   {/* <VerificationPage /> */}
 
   {/* <SignUp_SignIn_Component_Mobile/> */}
 
-	  {/* <CourseSelector /> */}
+	  <CourseSelector />
+
     {/* <SignUpComponentMobile/> */}
 
-    <MainPage/>
+    {/* <MainPage/> */}
 
   </React.StrictMode>,
   document.getElementById('root')
