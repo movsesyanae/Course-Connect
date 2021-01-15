@@ -181,6 +181,7 @@ const SignUpComponentMobile = (props) => {
 	
 
     return(
+			
 			<div className = 'entry-mobile page-container'>
 
 					<div className = 'entry-mobile grid-unit1'>
