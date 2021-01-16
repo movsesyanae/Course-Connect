@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef} from 'react';
 import './SignInStyle.css'
+import axios from 'axios'
 const SignUp = props => {
 
     // const [person, setPerson] = useState({ email: '', password: ''})
@@ -54,15 +55,30 @@ const SignUp = props => {
             return;
         }
 
-        // Do server call here
+       
 
 
         // Once everything is handled
-        const user = createUser();
-        props.user(user);
-		props.nextPage(1);        
-
         
+        //should push user account to server
+
+        const serverURL = 'ec2-3-92-91-162.compute-1.amazonaws.com';
+
+        axios.post(
+                serverURL, {createRequestJSON}
+            ).then(
+                res => {
+                console.log(res); console.log(res.data);}
+            ).catch(
+                err => {console.log(err)}
+        );
+        
+
+
+        //only do this part if user does not exist
+        const user = createUser();
+        const logInObject = {user: user, verified: false}
+        props.logIn(logInObject);  
     }
 
     const createUser = () => {
@@ -93,8 +109,9 @@ const SignUp = props => {
 
 
 
-        const grace = {user: user, name: name, gender: gender, lookingForList: lookingForList, verified: false, action: 0};
+        const grace = {user: user, email: email, name: name, gender: gender, lookingForList: lookingForList, verified: false, action: 0};
         console.log(grace);
+        return grace;
         
     }
     

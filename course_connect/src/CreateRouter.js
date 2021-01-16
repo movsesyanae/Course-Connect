@@ -16,24 +16,34 @@ const CreateRouter = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const history = useHistory();
     
-
+    
     function getCookie(cname) {
         var name = cname + "=";
         var decodedCookie = decodeURIComponent(document.cookie);
         var ca = decodedCookie.split(';');
         for(var i = 0; i <ca.length; i++) {
-          var c = ca[i];
-          while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-          }
-          if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-          }
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
         }
         return "";
-      }
+    }
+    
+    const checkVerified = () => {
+        var verifiedCookie = getCookie('verified');
+        if (verifiedCookie != '') {
+            return (verifiedCookie.toLowerCase() == 'true');
+        } else {
+            return false;
+        }
+    }
+    const [verified, setVerified] = useState(checkVerified);
 
-    const checkCookies = () => {
+    const checkLoggedIn = () => {
         var userId = getCookie('id');
         var userPass = getCookie('pass');
         if (userId != '' && userPass != '') {
@@ -42,23 +52,38 @@ const CreateRouter = () => {
             return null;
         }
     }
-    const [user, setUser] = useState(checkCookies);
+    const [user, setUser] = useState(checkLoggedIn);
     
-    const handleLogIn = (user) => {
+    const handleLogIn = (logInObject) => {
         var d = new Date();
         d.setTime(d.getTime() + (60 * 60 * 1000)); // 2 hour
-        document.cookie = 'id=' + user.id;
-        document.cookie = 'pass=' + user.passHash;
-        setUser(user);
+        document.cookie = 'id=' + logInObject.user.id;
+        document.cookie = 'pass=' + logInObject.user.passHash;
+        document.cookie = 'verified=' + logInObject.verified;
+        setUser(logInObject.user);
+        setVerified(logInObject.verified);
+
+        if(logInObject.verified) {
+            history.push('/courses');
+        } else {
+            history.push('/verification');
+        }
+
     }
 
     const handleLogOut = () => {
         var d = new Date();
         d.setTime(d.getTime() - 1000); // 2 hour
         var expires = "expires="+ d.toUTCString() + ';';
-        document.cookie = 'id=;' + expires;
-        document.cookie = 'pass=;' + expires;
+
+        document.cookie = "id=grace; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        document.cookie = "pass=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        document.cookie = "verified=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+
+        // document.cookie = 'id=;' + expires;
+        // document.cookie = 'pass=;' + expires;
         setUser(null)
+        history.push('/');
     }
 
     const handleNextPage = (value) => {
@@ -106,30 +131,30 @@ const CreateRouter = () => {
                 <Switch>
                     {/* <Route exact path = '/' render = {() => <SignUpSliderComponent user = {(user) => setUser(user)} verified = {(value) => handleAfterSignIn(value)}  />} />  */}
                     <Route exact path = '/'> 
-                        {isMobile ? <Redirect to = '/sign-up-mobile' /> : <SignUpSliderComponent user = {(user) => handleLogIn(user)} nextPage = {(value) => handleNextPage(value)}  />}
+                        {isMobile ? <Redirect to = '/sign-up-mobile' /> : <SignUpSliderComponent logIn = {(value) => handleLogIn(value)} />}
                     </Route>
                     
                     {/* <Route exact path = '/courses' render = {() => <CourseSelector nextPage = {(value) => handleNextPage(value)} user = {user}/>}/> */}
                     <Route exact path = '/courses'> 
-                        {!user? <Redirect to = '/' /> : <CourseSelector nextPage = {(value) => handleNextPage(value)} user = {user}/>}
+                        {!user? <Redirect to = '/' /> : <CourseSelector history = {history} user = {user}/>}
                     </Route>
                     
                     <Route exact path = '/verification'> 
-                        {!user || currentPage !== 1 ? <Redirect to = '/' /> : <Verification user = {user} nextPage = {(value) => handleNextPage(value)}/>}
+                        {!user || currentPage !== 1 ? <Redirect to = '/' /> : <Verification user = {user} history = {history} />}
                     </Route>
 
                     <Route exact path = '/sign-up-mobile'> 
                         {/* {user ? <Verification /> : <h1>damn</h1>} */}
-                        {!isMobile ? <Redirect to = '/' /> : <SignUpComponentMobile user = {(user) => handleLogIn(user)} nextPage = {(value) => handleNextPage(value)} />}
+                        {!isMobile ? <Redirect to = '/' /> : <SignUpComponentMobile logIn = {(value) => handleLogIn(value)} user = {(user) => handleLogIn(user)}  />}
                     </Route>
                     
                     <Route exact path = '/sign-in-mobile'> 
                         {/* {user ? <Verification /> : <h1>damn</h1>} */}
-                        {!isMobile ? <Redirect to = '/' /> : <SignInComponentMobile user = {(user) => handleLogIn(user)} nextPage = {(value) => handleNextPage(value)} />}
+                        {!isMobile ? <Redirect to = '/' /> : <SignInComponentMobile logIn = {(value) => handleLogIn(value)} user = {(user) => handleLogIn(user)}  />}
                     </Route>
 
                     <Route exact path = '/main'>
-                        {!user || currentPage !== 3 ? <Redirect to = '/' /> : <MainPage user = {(user) => handleLogOut(user)} nextPage = {(value) => handleNextPage(value)} />}
+                        {!user ? <Redirect to = '/' /> : <MainPage history = {history} user = {user} logOut = {(e) => {if(e) handleLogOut();}}  />}
                     </Route>
                 </Switch>
             {/* </Router> */}

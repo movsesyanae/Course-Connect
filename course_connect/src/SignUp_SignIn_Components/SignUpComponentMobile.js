@@ -129,13 +129,11 @@ const SignUpComponentMobile = (props) => {
           // Do server call here
 
 
+  
         // Once everything is handled
         const user = createUser();
-		props.user(user);
-		props.nextPage(1);
-        
-
-        
+        const logInObject = {user: user, verified: false}
+        props.logIn(logInObject);  
     }
 
     const createUser = () => {
@@ -162,8 +160,9 @@ const SignUpComponentMobile = (props) => {
 
 
 
-        const grace = {user: user, name: name, gender: gender, lookingForList: lookingFor, verified: false, action: 0};
-        console.log(grace);
+        const grace = {user: user, email: email, name: name, gender: gender, lookingForList: lookingFor, verified: false, action: 0};
+		console.log(grace);
+		return grace;
         
     }
 	const handleMult = (e) => {

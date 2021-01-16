@@ -12,8 +12,8 @@ const MainPage = (props) => {
                 <h4>How it works</h4>
                 <p>fgkfdkjgfkgnknsdfk <br />jsdfdsfsfsfsddssdfn</p>
             </div>
-            <button onClick = {(e) => {props.nextPage(2)}}> Update Classes </button>
-            <button onClick = {(e) => {props.nextPage(0)}}> Sign Out </button>
+            <button onClick = {(e) => {props.history.push('/courses')}}> Update Classes </button>
+            <button onClick = {(e) => {props.logOut(true)}}> Sign Out </button>
         </div>
     );
 

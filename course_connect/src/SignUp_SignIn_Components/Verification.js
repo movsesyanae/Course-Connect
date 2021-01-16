@@ -6,6 +6,14 @@ const Verification = (props) => {
     const history = useHistory();
 
     const [code, setCode] = useState('');
+
+    const createRequestJSON = () => {
+        const user = props.user; 
+        const grace = {user: user, code: code, action: 2};
+        console.log(grace);
+        return grace;
+    }
+
     const handleSubmit = (e) => {
         //check 
         console.log('hello');
@@ -13,7 +21,7 @@ const Verification = (props) => {
         console.log(codeInt);
 
         // history.push('/courses');
-        props.nextPage(2);
+        props.history.push('/courses');
     }
 
     return(

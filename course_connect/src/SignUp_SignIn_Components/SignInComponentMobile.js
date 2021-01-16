@@ -60,12 +60,11 @@ const SignUpComponentMobile = (props) => {
         //check servers return here
         const verified = true; // needs to be changed to be seen from server call
 
-        // once ready to move to next screen
+   
+        // Once everything is handled
         const user = createUser();
-
-        props.user(user);
-        if(verified) props.nextPage(2);
-        else props.nextPage(1);  
+        const logInObject = {user: user, verified: verified}
+        props.logIn(logInObject);  
     }
 
     const createUser = () => {

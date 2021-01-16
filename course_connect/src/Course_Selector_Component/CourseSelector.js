@@ -22,13 +22,11 @@ const CourseSelector = (props) => {
     // 3 - max number of courses already added
 
 
-    const getUserObject = () => {
-        return ({id: 1234, passHash: 4321});
-    }
 
-    const createJSON = () => {
-        const pls = {user: getUserObject(), courseList: courseList, action: 3};
+    const createRequestJSON = () => {
+        const pls = {user: props.user, courseList: courseList, action: 3};
         console.log(pls);
+        return pls;
     }
 
     const updateProfessor = (e) => {
@@ -194,7 +192,7 @@ const CourseSelector = (props) => {
         //do server call
 
         //make next page main page
-        props.nextPage(3);
+        props.history.push('/main');
     }
 
     const ShowUser = (user) => {
