@@ -15,16 +15,16 @@ ReactDOM.render(
 
     {/* <SignUpComplete /> */}
 
-    {/* <Router>
+    <Router>
       <CreateRouter />
-    </Router> */}
+    </Router>
   
 
    {/* <VerificationPage /> */}
 
   {/* <SignUp_SignIn_Component_Mobile/> */}
 
-	  <CourseSelector />
+	  {/* <CourseSelector /> */}
 
     {/* <SignUpComponentMobile/> */}
 
