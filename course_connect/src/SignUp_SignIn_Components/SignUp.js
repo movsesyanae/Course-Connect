@@ -62,7 +62,7 @@ const SignUp = props => {
         
         //should push user account to server
 
-        const serverURL = 'ec2-3-92-91-162.compute-1.amazonaws.com';
+        const serverURL = 'https://ec2-3-92-91-162.compute-1.amazonaws.com';
 
         axios.post(
                 serverURL, {createRequestJSON}

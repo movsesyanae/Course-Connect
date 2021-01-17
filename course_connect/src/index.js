@@ -7,6 +7,7 @@ import CourseSelector from './Course_Selector_Component/CourseSelector'
 import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import SignUpComponentMobile from './SignUp_SignIn_Components/SignUpComponentMobile';
 import VerificationPage from './SignUp_SignIn_Components/Verification';
+import HomePage from './textingComponents/HomePage'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,9 +16,9 @@ ReactDOM.render(
 
     {/* <SignUpComplete /> */}
 
-    <Router>
+    {/* <Router>
       <CreateRouter />
-    </Router>
+    </Router> */}
   
 
    {/* <VerificationPage /> */}
@@ -29,6 +30,7 @@ ReactDOM.render(
     {/* <SignUpComponentMobile/> */}
 
     {/* <MainPage/> */}
+    <HomePage/>
 
   </React.StrictMode>,
   document.getElementById('root')
