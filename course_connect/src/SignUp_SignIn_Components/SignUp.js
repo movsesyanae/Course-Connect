@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef} from 'react';
-import './SignInStyle.css'
+import './SignInStyle.scss'
 import axios from 'axios'
 const SignUp = props => {
 

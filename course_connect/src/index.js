@@ -7,6 +7,7 @@ import CourseSelector from './Course_Selector_Component/CourseSelector'
 import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import SignUpComponentMobile from './SignUp_SignIn_Components/SignUpComponentMobile';
 import VerificationPage from './SignUp_SignIn_Components/Verification';
+import SignUpSliderComponent from './SignUp_SignIn_Components/SignUpSliderComponent'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,6 +20,7 @@ ReactDOM.render(
       <CreateRouter />
     </Router>
   
+    {/* <SignUpSliderComponent /> */}
 
    {/* <VerificationPage /> */}
 
