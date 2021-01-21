@@ -49,8 +49,8 @@ const SignUp_SignIn_Component = (props) => {
 				</div>
 			</div>
 		</div>
-
 		<ErrorBox/>
+
 		</main>
 
     );

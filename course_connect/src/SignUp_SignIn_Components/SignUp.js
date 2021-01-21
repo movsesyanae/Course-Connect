@@ -62,17 +62,7 @@ const SignUp = props => {
         
         //should push user account to server
 
-        const serverURL = 'ec2-3-92-91-162.compute-1.amazonaws.com';
-
-        axios.post(
-                serverURL, {createRequestJSON}
-            ).then(
-                res => {
-                console.log(res); console.log(res.data);}
-            ).catch(
-                err => {console.log(err)}
-        );
-        
+       
 
 
         //only do this part if user does not exist
@@ -145,7 +135,7 @@ const SignUp = props => {
         <div className="entry-page form-container sign-up-container" id='sign-up-form'>
         <form action = "#" className="entry-page">
                 <div className="entry-page" id='signUpLabel'>
-                <h1 className="entry-page">Sign Up</h1>
+                <h1 className="entry-page" id = 'sign-up-label'>Sign Up</h1>
                 </div>
                 <input 
                     className="entry-page"
@@ -239,14 +229,19 @@ const SignUp = props => {
                     </div>
                 </div>
 
+                <div className = 'entry-page bio-container'>
+                    <label for = 'bio' className = 'entry-page'> Bio </label>
+
+                    <textarea className = 'bio' placeholder = 'tell your classmates something about yourself ;)'/>
+                
+                </div>
+
 
 
             
             <div className = 'entry-page sign-up-button'>
-
                 <button className="entry-page" type = 'submit' onClick = { (e) => {submitHandler(e);} }> Sign Up </button>
             </div>
-            {console.log(document.activeElement)}
         </form>
         </div>
         </body>

@@ -5,6 +5,11 @@
 	box-sizing: border-box;
 }
 
+body {
+	padding: 0;
+	margin: 0;
+}
+
 main.entry-page {
 	background: #f6f5f7;
 	display: flex;
@@ -270,8 +275,9 @@ input[type="checkbox"].entry-page {
 	
 }
 
-#signUpLabel {
-	padding-top: 10%;
+#sign-up-label {
+	/* padding-top: 50%; */
+	margin-top: 150px;
 }
 
 
@@ -373,12 +379,16 @@ footer a.entry-page {
   border-radius: 10px;
   margin-top: 5%;
   padding: 20px;
-  background-color: #f44336DD; /* Red */
+  background-color: #ff4b2b; /* Red */
   color: white;
   margin-bottom: 15px;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: -8.1%;
 }
 
-.closebtn {
+.entry-pageclosebtn {
 	margin-left: 15px;
 	color: white;
 	font-weight: bold;
@@ -389,6 +399,31 @@ footer a.entry-page {
 	transition: 0.3s;
   }
 
-  .closebtn:hover {
+  .entry-pageclosebtn:hover {
 	color: black;
+  }
+
+  .bio-container {
+	  width: 100%;
+	  background-color: #eee;
+	  padding: 3%;
+	  padding-bottom: 5%;
+	  display: flex;
+	  flex-direction: column;
+	  margin-top: 6%;
+	  border-radius: 3%;
+	  font-family: 'Montserrat', sans-serif;
+
+
+  }
+
+  textarea.bio {
+	  font-size: 13px;
+	  width: 90%;
+	  margin: auto;
+	  margin-top: 3%;
+	  resize: none;
+	  font-family: 'Montserrat', sans-serif;
+	  padding: 3%
+
   }

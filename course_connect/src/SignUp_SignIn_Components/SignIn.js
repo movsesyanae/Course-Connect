@@ -1,5 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import './SignInStyle.css'
+import axios from 'axios'
+
 
 const SignIn = (props) => {
 
@@ -46,6 +48,19 @@ const SignIn = (props) => {
 
         //check servers return here
         const verified = true; // needs to be changed to be seen from server call
+
+        const serverURL = 'https://3.92.91.162/';
+
+        axios.post(
+                serverURL, {createRequestJSON}
+            ).then(
+                res => {
+                console.log(res); console.log(res.data);}
+            ).catch(
+                err => {console.log(err)}
+        );
+        
+
 
         // once ready to move to next screen
         const user = createUser();
