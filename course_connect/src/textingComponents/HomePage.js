@@ -10,8 +10,11 @@ const HomePage = () => {
     const [rerun, setRerun] = useState(0);
 
     function textHandler (event) {
-        if(event.key === 'Enter'){
-            alert('deez nuts')
+        if(event.key === 'Enter' && !(event.shiftKey)){
+            event.preventDefault();
+            console.log(event);
+            event.target.value='';
+            // alert('deez nuts')
         }
     }
 
