@@ -72,11 +72,19 @@ const HomePage = () => {
         console.log(dataFile);
         if(dataFile.length > 0) {
             console.log('attempting to return')
+
+            let arr = dataFile.map((obj,index) => <a href="#" onClick={(e) => {e.preventDefault();contactClickHandler(obj)}}><ContactBox focus={obj} key={index} /> </a>);
+            arr[0] = <a href="#" onClick={(e) => {e.preventDefault();contactClickHandler(dataFile[0])}}><div id='contactBoxFirst'><p>{dataFile[0]["convoId"]}</p></div></a>
+            arr[arr.length-1] = <a href="#" onClick={(e) => {e.preventDefault();contactClickHandler(dataFile[dataFile.length - 1])}}><div id='contactBoxLast'><p>{dataFile[dataFile.length - 1]["convoId"]}</p></div></a>
+
+           
+
             return( 
                 <div id='overFlowBox'>
                 <div id='innerChatSelectBox'>
                 {
-                dataFile.map((obj,index) => <a href="#" onClick={(e) => {e.preventDefault();contactClickHandler(obj)}}><ContactBox focus={obj} key={index} /> </a>)
+                // dataFile.map((obj,index) => <a href="#" onClick={(e) => {e.preventDefault();contactClickHandler(obj)}}><ContactBox focus={obj} key={index} /> </a>)
+                arr
                 }
                 </div>
                 </div>
@@ -142,7 +150,7 @@ const HomePage = () => {
             <div id = 'chatBox'>
                 <DisplayMessages />
                 <div id='writingBox'>
-                        <textarea onKeyPress = {(event) => {textHandler(event);}}>
+                        <textarea placeholder = 'Send a message!' onKeyPress = {(event) => {textHandler(event);}}>
                         </textarea>
                 </div>
 
