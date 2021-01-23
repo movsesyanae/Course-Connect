@@ -1,5 +1,7 @@
 import React, { useState, useEffect} from 'react';
-import './SignInStyle.css'
+import './SignInStyle.scss'
+import axios from 'axios'
+
 
 const SignIn = (props) => {
 
@@ -47,6 +49,19 @@ const SignIn = (props) => {
         //check servers return here
         const verified = true; // needs to be changed to be seen from server call
 
+        const serverURL = 'https://3.92.91.162/';
+
+        axios.post(
+                serverURL, {createRequestJSON}
+            ).then(
+                res => {
+                console.log(res); console.log(res.data);}
+            ).catch(
+                err => {console.log(err)}
+        );
+        
+
+
         // once ready to move to next screen
         const user = createUser();
         const logInObject = {user: user, verified: verified};
@@ -73,12 +88,11 @@ const SignIn = (props) => {
     }
 
     return (
-        <body id='mobileEnterBody'>
-        <div className="entry-page form-container sign-in-container">
-        <form action = '#' className="entry-page">
-            <h1 className="entry-page">Sign in</h1>
+        <div className = 'sign-in-container'>
+            <form action = '#' className="sign-in-page">
+                <h1 className="entry-page">Sign in</h1>
+                
                 <input 
-                    className="entry-page"
                     type = 'text' 
                     id = 'email' 
                     placeholder = 'email'
@@ -98,9 +112,8 @@ const SignIn = (props) => {
                 />
 
                 <button className="entry-page" type = 'submit' onClick = { submitHandler }> Login </button>
-           </form>
+            </form>
         </div>
-        </body>
     );
 
     
