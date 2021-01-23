@@ -1,16 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
- $title-color: rgb(129, 100, 100);
- $header-color: rgba(255, 146, 126, 0.692);
- $side-colors: lightgrey; //was lightgrey
+ $title-color: #FFF;
+ $header-color: #EC7063;
+ $side-colors: #ebebeb; //was lightgrey
  $chat-color: #FFF;
- $select-chat:rgb(252, 210, 210);
+ $select-chat:#d7d7d7;
  $text-box: #F2F4F4;
  $chat-right: #EC7063;
  $chat-left: lightgrey;
  $text-right:#FFF;
  $text-left:#000;
- $info-color:#f5edeb; //was lightgrey
+ $info-color:#ffffff; //was lightgrey
 
 * {
     margin: 0;
@@ -19,7 +20,7 @@
 
   %border-package {
     border-style: solid;
-    border-radius: 1px;
+    border-radius: 2px;
     border-color: black;
   }
 
@@ -44,6 +45,7 @@
         grid-row: 1/span 1;
         
         @extend %border-package;
+        border-top: none;
         border-bottom: none;
 
         display:grid;
@@ -52,6 +54,7 @@
 
         h1 {
             
+            // font-family: 'Pacifico', cursive;
             align-self:center;
             margin-left: 5%;
             color:$title-color;
@@ -70,9 +73,10 @@
 
         display:grid;
         grid-template-rows: auto 50%;
+        border-bottom: none;
 
         @extend %border-package;
-        border-right: none;
+        
         border-top: none;
 
         #overFlowBox{
@@ -85,12 +89,18 @@
               
                 display: grid;
                 grid-template-rows:auto;
-                // row-gap: .1em;
+                
+                
+                // row-gap: 1em;
+                // margin-left: 0.5em;
+                // margin-right: 0.5em;
+                
+                
                 width: 100%;
                 height: fit-content;
     
                 a {
-                    color: black;
+                    color: darkblue;
                     text-decoration: none;
                 }
 

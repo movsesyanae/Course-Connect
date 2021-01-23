@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import NewSignUpSignIn from './SignUp_SignIn_Components/NewSignUpSignIn'
 import MainPage from './MainPage'
 import CreateRouter from './CreateRouter';
 import CourseSelector from './Course_Selector_Component/CourseSelector'
@@ -16,10 +17,13 @@ ReactDOM.render(
 
     {/* <SignUpComplete /> */}
 
-    {/* <Router>
+     {/* <Router>
       <CreateRouter />
-    </Router> */}
-  
+    </Router> 
+   */}
+
+    {/* <NewSignUpSignIn/> */}
+
 
    {/* <VerificationPage /> */}
 
