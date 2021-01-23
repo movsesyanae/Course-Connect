@@ -4,11 +4,18 @@ import './newSignUpIn.scss';
 const NewSignUpSignIn = (props) => {
 
     const SignUp = () => {
+        const [signUpFields,setSignUpFields] = 
+        useState({name:'',email:'',password:'',confirmPassword:'',
+        studyBuddy:false,friend:false,sex:false,male:false,
+        female:false,other:false,nonBinary:''});
+        const [signUpFailMessage, setSignUpFailMessage] = useState('');
+        
+
         return (
             <div id = "newSignUpBox">
 
                 <div id='Label'>
-                    
+
                 </div>
 
                 <div id='name'>
