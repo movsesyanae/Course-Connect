@@ -22,7 +22,7 @@ ReactDOM.render(
     </Router> 
    */}
 
-    {/* <NewSignUpSignIn/> */}
+    <NewSignUpSignIn/>
 
 
    {/* <VerificationPage /> */}
@@ -34,7 +34,7 @@ ReactDOM.render(
     {/* <SignUpComponentMobile/> */}
 
     {/* <MainPage/> */}
-    <HomePage/>
+    {/* <HomePage/> */}
 
   </React.StrictMode>,
   document.getElementById('root')
