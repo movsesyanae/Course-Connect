@@ -1,253 +1,146 @@
 import React, { useState, useEffect, useRef} from 'react';
-import './SignInStyle.scss'
+import './newSignUpIn.scss';
 import axios from 'axios'
-const SignUp = props => {
+import { Auth } from 'aws-amplify';
 
-    // const [person, setPerson] = useState({ email: '', password: ''})
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [studyBuddy, setStudyBuddy] = useState(false);
-    const [friend, setFriend] = useState(false);
-    const [sex, setSex] = useState(false);
-    const [male, setMale] = useState(false);
-    const [female, setFemale] = useState(false);
-    const [other, setOther] = useState(false);
-    const [nonBinary, setNonBinary] = useState('');
-    const [signUpFailMessage, setsignUpFailMessage] = useState('');
+
+const SignUp = (props) => {
+    const [signUpFields,setSignUpFields] = 
+    useState({name:'',email:'',password:'',confirmPassword:'',
+    studyBuddy:false,friend:false,sex:false,male:false,
+    female:false,other:false,nonBinary:'',bio:''});
+    const [signUpFailMessage, setSignUpFailMessage] = useState('');
     const whereWeAt = useRef(document.getElementById('name'));
 
-    
-    useEffect(() => {whereWeAt.current.focus()},[nonBinary]);
-
-    function submitHandler (e) {
-        e.preventDefault();
-
-        let stringInputs = [name,email,password,confirmPassword,nonBinary];
-        let submitPass = true;  //as long as true should succefully submit
-
-        if(name == '' || email == '' || password == '' || confirmPassword == '' ||  (!studyBuddy && !friend && !sex) || (!male && !female && !other) || (other && nonBinary == '')) {
-            props.failMessage('You have not selected all fields');
-            submitPass = false;
-            return;
-        }
-
-
-        for(let x in stringInputs) { //injection prevention
-            console.log(stringInputs[x]);
-            if(stringInputs[x].includes('\'') || stringInputs[x].includes('<') || stringInputs[x].includes('>')) {
-                props.failMessage('You may not include symbols such as \' or < >');
-                submitPass = false;
-                return;
-            }
-        }
-
-        if(!(password == confirmPassword)) { //FIX: passwords showing up in console
-            props.failMessage('Passwords must match!');
-            submitPass = false;
-            return;
-        }
-
-        if(!email.endsWith('@umd.edu')) {
-            props.failMessage('Please use a @umd.edu email');
-            submitPass = false;
-            return;
-        }
-
-       
-
-
-        // Once everything is handled
-        
-        //should push user account to server
-
-       
-
-
-        //only do this part if user does not exist
-        const user = createUser();
-        const logInObject = {user: user, verified: false}
-        props.logIn(logInObject);  
-    }
-
-    const createUser = () => {
-        const crypto = require('crypto'); 
-        const hash = crypto.createHash('sha256');
-        const id = hash.update('email', 'binary').digest('hex');
-        const passHash = hash.update('password', 'binary').digest('hex');
-        // const user = {id: id, passHash: passHash};
-        const user = {id: email, passHash: password};
-        return user;
-    }
-
-    const createRequestJSON = () => {
-        const user = createUser(); 
-
-        // get gender
-        let gender = '';
-        if (male) gender = 'male';
-        else if (female) gender = 'female';
-        else gender = nonBinary;
-
-        // get enum looking for list
-        let lookingForList = []
-        if(studyBuddy) lookingForList.push(1);
-        if(friend) lookingForList.push(2);
-        if(sex) lookingForList.push(3);
-
-
-
-
-        const grace = {user: user, email: email, name: name, gender: gender, lookingForList: lookingForList, verified: false, action: 0};
-        console.log(grace);
-        return grace;
-        
-    }
-    
-
+    useEffect(() => {whereWeAt.current.focus()},[signUpFields.nonBinary]);
 
     const NonBinary = () => {
-        if (other == true) {
-            return (
-                    <div className="entry-page" id='nonBinaryBox'>
-                    {/* <label htmlFor = "nonBinary"> Confirm Gender : </label> */}
+        if(signUpFields.other){
+            return(
+                <div id='nonBinary-field'>
                     <input 
-                        className="entry-page"
-                        type = 'text' 
-                        id = 'nonBinary'
-                        key = 'nonBinary'
+                        type = 'text'
+                        key = 'nonBinary'  
                         name = 'nonBinary'
-                        placeholder = 'specify gender' 
                         ref = {whereWeAt}
-                        value = {nonBinary} 
-                        onChange = {(e) => {setNonBinary(e.target.value); }} 
+                        placeholder = 'gender' 
+                        value = {signUpFields.nonBinary} 
+                        onChange = { (e) => setSignUpFields({...signUpFields,nonBinary:e.target.value}) } 
                     /> 
-                </div>  
-                );
+                    </div>
+            )
         } else {
-            return (<></>);
+            return(<></>)
+        }
+    }
+
+    async function handleSignUp(e) {
+        e.preventDefault();
+        try {
+            const { user } = await Auth.signUp({
+                username: signUpFields.email,
+                password: signUpFields.password,
+                attributes: {
+                    email: signUpFields.email          // optional
+                    // phone_number,   // optional - E.164 number convention
+                    // other custom attributes 
+                }
+            });
+            console.log(user);
+            props.returnObject({
+                nextPage: 'confirm-email',
+                email: signUpFields.email,
+                password: signUpFields.password
+            });
+        } catch (error) {
+            console.log('error signing up:', error);
         }
     }
 
     return (
-        <body id='mobileEnterBody'>
-        <div className="entry-page form-container sign-up-container" id='sign-up-form'>
-        <form action = "#" className="entry-page">
-                <div className="entry-page" id='signUpLabel'>
-                <h1 className="entry-page" id = 'sign-up-label'>Sign Up</h1>
-                </div>
-                <input 
-                    className="entry-page"
-                    type = 'text' 
-                    id = 'name' 
-                    name = 'name'
-                    placeholder = 'name' 
-                    ref = {whereWeAt}
-                    value = {name} 
-                    onChange = { (e) => setName(e.target.value) } 
-                /> 
+        <div id = "newSignUpBox">
 
+            <div id='Label-field'>
+                <h1>Sign Up</h1>
+            </div>
+
+            <div id='name-field'>
+            <input 
+                id='name'
+                ref = {whereWeAt}
+                type = 'text'  
+                name = 'name'
+                placeholder = 'name' 
+
+                value = {signUpFields.name} 
+                onChange = { (e) => setSignUpFields({...signUpFields,name:e.target.value}) }
+            /> 
+            </div>
+
+            <div id='email-field'>
                 <input 
-                    className="entry-page"
-                    type = 'text' 
-                    id = 'email' 
+                    type = 'text'  
                     name = 'email'
                     placeholder = 'email' 
-                    value = {email} 
-                    onChange = { (e) => setEmail(e.target.value) } 
-                />
+                    value = {signUpFields.email} 
+                    onChange = { (e) => setSignUpFields({...signUpFields,email:e.target.value}) }
+                /> 
+            </div> 
 
+            <div id='password-field'>
                 <input 
-                    className="entry-page"
-                    type = 'password' 
-                    id = 'password' 
+                    type = 'password'  
                     name = 'password'
-                    placeholder = "passworrd" 
-                    value = {password} 
-                    onChange = {(e) => setPassword(e.target.value)} 
-                />
+                    placeholder = 'password' 
+                    value = {signUpFields.password} 
+                    onChange = { (e) => setSignUpFields({...signUpFields,password:e.target.value}) }
+                /> 
+            </div> 
 
+            <div id='confirmPassword-field'>
                 <input 
-                    className="entry-page"
-                    type = 'password' 
-                    placeholder = 'confirm password'
-                    id = 'confirm password' 
-                    name = 'confirm password' 
-                    value = {confirmPassword} 
-                    onChange = {(e) => setConfirmPassword(e.target.value)} 
-                />
-
-                <div className = 'entry-page gender-selection-container'>
-
-                    <label className="entry-page" htmlFor = "gender" id="genderLabel"> Gender</label>
-                    <div className="entry-page gender-buttons">
-                        <div className="entry-page" id = "gb1">
-                            <input className="entry-page" type = 'radio' onClick = {() => {setMale(true); setFemale(false); setOther(false);}} id = 'male' name = 'gender' value = '0' />
-                            <label className="entry-page" htmlFor = 'male'> Male </label>
-                        </div>
-                        <div className="entry-page" id = "gb2">
-                            <input className="entry-page" type = 'radio' onClick = {() => {setMale(false); setFemale(true); setOther(false);}} id = 'female' name = 'gender' value = '1' />
-                            <label className="entry-page" htmlFor = 'female'> Female </label>
-                        </div>
-                        <div className="entry-page" id = "gb3">
-                            <input className="entry-page" type = 'radio' onClick = {() => {setMale(false); setFemale(false); setOther(true); }} id = 'other' name = 'gender' value = '2' />
-                            <label className="entry-page" htmlFor = 'other'> Other </label>
-                        </div>
-
-                    </div>
-                        
-                    <NonBinary className="entry-page"/> 
-                </div>
-
-            
-
-                
-                <div className = 'entry-page looking-for-container'>
-                
-                    <label className="entry-page"> I'm looking for a... </label>
-                    <div className = 'entry-page looking-for-buttons'>
-
-
-
-                        <div className="entry-page">
-                            <input className="entry-page" type = 'checkbox' onClick = {() => {setStudyBuddy( !studyBuddy)}} id = 'study buddy' name = 'study buddy' value = '0'/>
-                            <label className="entry-page" htmlFor = 'study buddy' >Study buddy</label> 
-                        </div>
-
-                        <div className="entry-page">
-                            <input className="entry-page"type = 'checkbox' onClick = {() => {setFriend(!friend)}} id = 'friend' name = 'friend' value = '1'/>
-                            <label className="entry-page" htmlFor = 'friend'>friend</label> 
-                        </div>
-
-                        <div className="entry-page">
-                            <input className="entry-page" type = 'checkbox' onClick = {() => {setSex(!sex)}} id = 'sex' name = 'sex' value = '2'/>
-                            <label className="entry-page" htmlFor = 'sex'>friend ;)</label>
-                        </div>
-                        
-        
-                    </div>
-                </div>
-
-                <div className = 'entry-page bio-container'>
-                    <label for = 'bio' className = 'entry-page'> Bio </label>
-
-                    <textarea className = 'bio' placeholder = 'tell your classmates something about yourself ;)'/>
-                
-                </div>
-
-
-
-            
-            <div className = 'entry-page sign-up-button'>
-                <button className="entry-page" type = 'submit' onClick = { (e) => {submitHandler(e);} }> Sign Up </button>
+                    type = 'password'  
+                    name = 'confirm password'
+                    placeholder = 'confirm password' 
+                    value = {signUpFields.confirmPassword} 
+                    onChange = { (e) => setSignUpFields({...signUpFields,confirmPassword:e.target.value}) }
+                /> 
             </div>
-        </form>
-        </div>
-        </body>
-    );
 
-    
+            <div id='gender-field'>
+                <label>Gender</label>
+                <input type = 'radio'  id = 'male-r' name = 'gender' value = '0' onClick = { (e) => setSignUpFields({...signUpFields,male:true,female:false,other:false}) }/>
+                <input type = 'radio'  id = 'female-r' name = 'gender' value = '1' onClick = { (e) => setSignUpFields({...signUpFields,male:false,female:true,other:false}) }/>
+                <input type = 'radio'  id = 'other-r' name = 'gender' value = '2' onClick = { (e) => setSignUpFields({...signUpFields,male:false,female:false,other:true}) }/>
+                <label id= 'male-l'>Male</label>
+                <label id= 'female-l'>Female</label>
+                <label id= 'other-l'>Other</label>
+            </div>
+
+            <NonBinary/>
+
+            <div id='lookingfor-field'>
+                <label>Looking For:</label>
+                    <input type = 'checkbox'  id = 'study-buddy-c' name = 'studdy-buddy' value = '0' onClick = { (e) => setSignUpFields({...signUpFields,studyBuddy:!signUpFields.studyBuddy})}/>
+                    <input type = 'checkbox'  id = 'friend-c' name = 'friend' value = '1' onClick = { (e) => setSignUpFields({...signUpFields,friend:!signUpFields.friend})}/>
+                    <input type = 'checkbox'  id = 'sex-c' name = 'sex' value = '2' onClick = { (e) => setSignUpFields({...signUpFields,sex:!signUpFields.sex})}/>
+                    <label id= 'study-buddy-l'>Studdy <br/>Buddy</label>
+                    <label id= 'friend-l'>Friend</label>
+                    <label id= 'sex-l'>Friend ;)</label>
+            </div>
+
+            <div id='bio-field'>
+                <label>Bio</label>
+                <textarea placeholder = 'tell your classmates something about yourself ;)' value={signUpFields.bio} onChange = { (e) => setSignUpFields({...signUpFields,bio:e.target.value})}/>
+            </div>
+
+            <div id='submit-field'>
+                <button type = 'submit' onClick = { handleSignUp }> Sign Up </button>
+            </div>
+
+        </div>
+    );
 }
+
 
 export default SignUp;

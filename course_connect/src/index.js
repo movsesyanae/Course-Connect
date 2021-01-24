@@ -9,6 +9,9 @@ import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from 're
 import SignUpComponentMobile from './SignUp_SignIn_Components/SignUpComponentMobile';
 import VerificationPage from './SignUp_SignIn_Components/Verification';
 import HomePage from './textingComponents/HomePage'
+import Amplify, { Auth } from 'aws-amplify';
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,12 +20,12 @@ ReactDOM.render(
 
     {/* <SignUpComplete /> */}
 
-     {/* <Router>
+     <Router>
       <CreateRouter />
     </Router> 
-   */}
+  
 
-    <NewSignUpSignIn/>
+    {/* <NewSignUpSignIn/> */}
 
 
    {/* <VerificationPage /> */}

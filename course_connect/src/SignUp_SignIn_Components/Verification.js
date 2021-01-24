@@ -1,27 +1,58 @@
-import React, { useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import './VerificationPageStyle.scss';
+import { Auth } from 'aws-amplify';
 
 const Verification = (props) => {
-    const history = useHistory();
-
     const [code, setCode] = useState('');
 
-    const createRequestJSON = () => {
-        const user = props.user; 
-        const grace = {user: user, code: code, action: 2};
-        console.log(grace);
-        return grace;
+    useEffect(() => {
+        checkUser();
+    }, [])
+
+    async function checkUser() {
+        console.log('doing this ');
+        try {
+            // const x = await Auth.currentSession();
+            // console.log('well damn', x);
+            const user = await Auth.currentAuthenticatedUser();
+            console.log('already verified in verification page', user['attributes']['email']);
+            props.returnObject({nextPage: 'sign-out', message: 'already verified in email confirmation page'});            
+        } catch(error) {
+        }
+
     }
 
-    const handleSubmit = (e) => {
-        //check 
-        console.log('hello');
-        const codeInt = parseInt(code);
-        console.log(codeInt);
+    async function handleSubmit(e) {
 
-        // history.push('/courses');
-        props.history.push('/courses');
+        try {
+            await Auth.confirmSignUp(props.email, code);
+            
+
+
+            try {
+                const user = await Auth.signIn(props.email, props.password);
+                console.log(user);
+                props.returnObject({
+                    nextPage: 'course-selection'
+                });
+            } catch (error) {
+                props.returnObject({
+                    nextPage: 'sign-out',
+                    message: error
+                });
+            }
+
+
+
+
+        } catch (error) {
+            props.returnObject({
+                nextPage: 'sign-in',
+                message: 'something went wrong during email verification'
+            });
+        }
+
     }
 
     return(

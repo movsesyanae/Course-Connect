@@ -1,7 +1,8 @@
-import React, { useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
 import './CourseSelectorStyle.scss'
+import { Auth } from 'aws-amplify';
 
 
 
@@ -15,19 +16,34 @@ const CourseSelector = (props) => {
     const [course, setCourse] = useState({id: '', prof: ''});
     const [valid, setValid] = useState(false);
     const [courseList, setCourseList] = useState([]);
-    const [errorCode, setErrorCode] = useState(0); 
+    const [errorCode, setErrorCode] = useState(0);
+    const [email, setEmail] = useState(null);
     // 0 - all works well 
     // 1 - course isn't valid 
     // 2 - professor isn't selected
     // 3 - max number of courses already added
 
 
+    useEffect(() => {
+        checkUser();
+    }, [])
 
-    const createRequestJSON = () => {
-        const pls = {user: props.user, courseList: courseList, action: 3};
-        console.log(pls);
-        return pls;
+    async function checkUser() {
+        console.log('doing this ');
+        try {
+            // const x = await Auth.currentSession();
+            // console.log('well damn', x);
+            const user = await Auth.currentAuthenticatedUser();
+            console.log('in course-selector', user['attributes']['email']);
+            setEmail(user['attributes']['email']);
+        } catch(error) {
+            setEmail(null);
+            console.log('got an error in course-selector', error);
+            props.returnObject({nextPage: 'sign-out', message: 'authorization failure in course selector'});
+        }
+
     }
+
 
     const updateProfessor = (e) => {
         console.log(e.target.value);
@@ -192,17 +208,11 @@ const CourseSelector = (props) => {
         //do server call
 
         //make next page main page
-        props.history.push('/main');
+        props.returnObject({
+            nextPage: 'home-page'
+        });
     }
 
-    const ShowUser = (user) => {
-        return (
-            <div>
-                <h4>{user.id}</h4>
-                <h4>{user.passHash}</h4>
-            </div>
-        );
-    } 
 
     return (
         <body id="courseSelectorBody">

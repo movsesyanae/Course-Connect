@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "terpconnect5908f05d": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

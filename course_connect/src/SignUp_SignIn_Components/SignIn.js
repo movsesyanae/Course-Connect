@@ -1,122 +1,76 @@
 import React, { useState, useEffect} from 'react';
-import './SignInStyle.scss'
+import './newSignUpIn.scss';
 import axios from 'axios'
+import { Auth } from 'aws-amplify';
+
 
 
 const SignIn = (props) => {
-
-    // const [person, setPerson] = useState({ email: '', password: ''})
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-    const handleChange = (e) => {
-        
-    }
-
-    function submitHandler (e) {
+    const [signUpFields,setSignUpFields] = 
+    useState({email:'',password:''});
+    
+    async function handleSignIn(e) {
+        console.log('sign up init');
         e.preventDefault();
 
-        const stringInputs = [email, password];
+        
+        try {
+            const user = await Auth.signIn(signUpFields.email, signUpFields.password);
+            console.log(user);
+            props.returnObject({
+                nextPage: 'course-selection'
+            });
+        } catch (error) {
+            console.log('error signing in', error);
+            if(error['code'] === 'UserNotConfirmedException' ) {
+                //User hasnt verified email
+                console.log('i want grace');
+                Auth.resendSignUp(signUpFields.email);
 
-        let submitPass = true;  //as long as true should succefully submit
-
-        if(email == '' || password == '') {
-            props.failMessage('You have not filled all fields');
-            submitPass = false;
-            return;
-        }
-
-
-        for(let x in stringInputs) { //injection prevention
-            console.log(stringInputs[x]);
-            if(stringInputs[x].includes('\'') || stringInputs[x].includes('<') || stringInputs[x].includes('>')) {
-                // props.failMessage('Your email should not include symbols such as \' or < >');
-                props.failMessage('Bru don\'t do that');
-                submitPass = false;
-                return;
+                props.returnObject({
+                    nextPage: 'confirm-email',
+                    email: signUpFields.email,
+                    password: signUpFields.password
+                });
             }
         }
-
-        if(!email.endsWith('@umd.edu')) {
-            props.failMessage('Please use your @umd.edu email');
-            submitPass = false;
-            return;
-        }
-
         
-        const requestJSON = createRequestJSON();
-
-        //check servers return here
-        const verified = true; // needs to be changed to be seen from server call
-
-        const serverURL = 'https://3.92.91.162/';
-
-        axios.post(
-                serverURL, {createRequestJSON}
-            ).then(
-                res => {
-                console.log(res); console.log(res.data);}
-            ).catch(
-                err => {console.log(err)}
-        );
-        
-
-
-        // once ready to move to next screen
-        const user = createUser();
-        const logInObject = {user: user, verified: verified};
-        props.logIn(logInObject);        
-
-    }
-
-    const createUser = () => {
-        const crypto = require('crypto'); 
-        const hash = crypto.createHash('sha256');
-        const id = hash.update('email', 'binary').digest('hex');
-        const passHash = hash.update('password', 'binary').digest('hex');
-        // const user = {id: id, passHash: passHash};
-        const user = {id: email, passHash: password};
-        return user;
-
-    }
-
-    const createRequestJSON = () => {
-        const user = createUser(); 
-        const grace = {user: user, action: 1};
-        console.log(grace);
-        return grace;
     }
 
     return (
-        <div className = 'sign-in-container'>
-            <form action = '#' className="sign-in-page">
-                <h1 className="entry-page">Sign in</h1>
-                
-                <input 
-                    type = 'text' 
-                    id = 'email' 
-                    placeholder = 'email'
-                    name = 'email' 
-                    value = {email} 
-                    onChange = { (e) => setEmail(e.target.value) } 
-                /> 
+        <div id = 'newSignInBox'>
+        <div id='height-box'>
+            <div id='Label-field'>
+                <label><h1>Sign In</h1></label>
+            </div>
 
+            <div id='email-field'>
                 <input 
-                    className="entry-page"
-                    type = 'password' 
-                    id = 'password' 
-                    placeholder ='password'
-                    name = 'password' 
-                    value = {password} 
-                    onChange = {(e) => setPassword(e.target.value)} 
-                />
+                        type = 'text'  
+                        name = 'email'
+                        placeholder = 'email' 
+                        value = {signUpFields.email} 
+                        onChange = { (e) => setSignUpFields({...signUpFields,email:e.target.value}) } 
+                    /> 
+            </div>
 
-                <button className="entry-page" type = 'submit' onClick = { submitHandler }> Login </button>
-            </form>
+            <div id='password-field'>
+                <input 
+                        type = 'password'  
+                        name = 'password'
+                        placeholder = 'password' 
+                        value = {signUpFields.password} 
+                        onChange = { (e) => setSignUpFields({...signUpFields,password:e.target.value}) }
+                    /> 
+            </div>
+
+            <div id='submit-field'>
+                <button type = 'submit' onClick = { handleSignIn }> Sign In </button>
+            </div>
+            </div>
         </div>
     );
-
-    
 }
+
 
 export default SignIn;
