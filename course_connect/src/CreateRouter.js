@@ -73,10 +73,10 @@ const CreateRouter = () => {
         <div>
 
             
-            { email ?  
+            {/* { email ?  
             <h1>User: {email}</h1> : null
             }
-            
+             */}
 
             {/* <Router> */}
                 <Switch>

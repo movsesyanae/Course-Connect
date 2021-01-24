@@ -3,6 +3,7 @@ import './newSignUpIn.scss';
 import { Auth } from 'aws-amplify';
 import SignUp from './SignUp'
 import SignIn from './SignIn'
+import Switcheroo from './Switcheroo'
 
 
 const NewSignUpSignIn = (props) => {
@@ -30,8 +31,10 @@ const NewSignUpSignIn = (props) => {
 
     return(
         <div id = "newOuterBox">
+            
             <SignUp returnObject = {(value) => props.returnObject(value)}/>
             <SignIn returnObject = {(value) => props.returnObject(value)}/>
+            <Switcheroo/>
         </div>
     );
 
