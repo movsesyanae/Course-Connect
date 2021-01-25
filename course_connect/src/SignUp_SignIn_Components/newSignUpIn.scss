@@ -345,7 +345,7 @@
     #newSignInBox{
         grid-column: 2/ span 1;
         grid-row: 2 / span 1;
-        background-color: lightskyblue;
+        background-color: #FFF;
 
         display:grid;
         grid-template-rows: 25% auto 25%;
@@ -450,16 +450,19 @@
     //switcheroo CSS
 
     #positionBox {
+        visibility: none;
         grid-row: 2 / span 1;
         grid-column: 2 / span 2;
+        pointer-events:none;
 
         
         
         #switchBox{
             width: 50%;
             height:100%;
-            background-color: lightblue;
+            background-color: lightskyblue;
 
+            pointer-events: auto;
             display: grid;
             grid-template-rows: 15% auto 25%;
 

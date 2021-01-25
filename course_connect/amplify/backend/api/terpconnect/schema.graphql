@@ -1,0 +1,13 @@
+type Conversation @model {
+  name: String!
+  messages: [Message] @connection(keyName: "conversationMessage", fields: ["name"])
+}
+
+type Message @model 
+  @key(name: "conversationMessage", fields: ["conversationID"]) {
+  
+  message: String!
+  from: String!
+  conversationID: String!
+}
+

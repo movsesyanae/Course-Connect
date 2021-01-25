@@ -37,7 +37,7 @@ const Switcheroo = () => {
             variants = {variants}
             initial = "init"
             animate = {(sideA) ? "left" : "right"}
-            transition={{type:'spring',delay:0.2}}
+            transition={{type:'spring',delay:0.1}}
             >
                 <div id='height-box'>
                     <div id='title-tag'>
