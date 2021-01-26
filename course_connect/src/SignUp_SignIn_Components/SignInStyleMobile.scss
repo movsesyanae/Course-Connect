@@ -4,21 +4,23 @@
 
 /*Install Cass!*/
 
+
+
 *.entry-mobile {
     font-family: 'Montserrat', sans-serif;
     box-sizing: border-box;
     font-size: 1em;
 }
 
-@media only screen and (max-width: 1440px) {
-    body {
-    background-color: #FF4B2B;
-    }
+
+
+
+
+
+body{
+    padding:0;
+    margin:0;
 }
-
-
-
-
 
 
 
@@ -29,10 +31,10 @@ div.entry-mobile.page-container {
     grid-template-rows: repeat(8, 1fr);
     /* border-style: solid;
     border-color: black; */
-    /* background-color: #FF4B2B; */
+    background-color: #FF4B2B; 
     grid-gap: 10px;
     
-    width: 95vw;
+    width: 100vw;
     height: 100vh; 
     margin: 0;
     padding: 0;

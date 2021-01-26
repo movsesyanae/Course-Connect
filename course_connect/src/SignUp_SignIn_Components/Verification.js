@@ -7,22 +7,22 @@ import * as mutations from '../graphql/mutations'
 const Verification = (props) => {
     const [code, setCode] = useState('');
 
-    useEffect(() => {
-        checkUser();
-    }, [])
+    // useEffect(() => {
+    //     checkUser();
+    // }, [])
 
-    async function checkUser() {
-        console.log('doing this ');
-        try {
-            // const x = await Auth.currentSession();
-            // console.log('well damn', x);
-            const user = await Auth.currentAuthenticatedUser();
-            console.log('already verified in verification page', user['attributes']['email']);
-            props.returnObject({nextPage: 'sign-out', message: 'already verified in email confirmation page'});            
-        } catch(error) {
-        }
+    // async function checkUser() {
+    //     console.log('doing this ');
+    //     try {
+    //         // const x = await Auth.currentSession();
+    //         // console.log('well damn', x);
+    //         const user = await Auth.currentAuthenticatedUser();
+    //         console.log('already verified in verification page', user['attributes']['email']);
+    //         props.returnObject({nextPage: 'sign-out', message: 'already verified in email confirmation page'});            
+    //     } catch(error) {
+    //     }
 
-    }
+    // }
 
     const createUser = async() => {
         
@@ -91,7 +91,9 @@ const Verification = (props) => {
     }
 
     return(
-        <div id='outerScreen'>
+
+
+            <div id='outerScreen'>
                 <div id='areaBox'>
                     <div id='title'>
                         <p>Please Verify</p>

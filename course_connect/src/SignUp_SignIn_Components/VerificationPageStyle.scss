@@ -75,7 +75,17 @@
         }
     }
     }
+
+    #outerScreen {
+        height: 100vh;
+        width: 100vw;
+        //display: grid;
+        //grid-template-columns: auto 25% 25% auto;
+        //grid-template-rows: auto 60% auto;
+        background-color: #4287f5;
     
+        font-family: 'Montserrat', sans-serif;
+        font-size:3vmax;
     
     //------mobile
     
@@ -163,3 +173,4 @@
             }
         }
         }
+    }
