@@ -1,59 +1,165 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
-div.verification-page {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1em;
-    background-color: #DDD;
+@media only screen and (min-width: 1440px){
+    #outerScreen {
+        height: 100vh;
+        width: 100vw;
+        display: grid;
+        grid-template-columns: auto 25% 25% auto;
+        grid-template-rows: auto 60% auto;
+        background-color: #eee;
     
-    padding: .5em;
-    border-radius: 10px;
-    border-width: .2em;
-    border-style: solid;
-    border-color: black;
-    text-align: center;
-
-
-
-    @media only screen and (max-width: 1440px) {
-        margin-top: 40%;
-
-        #description {
-            // h4 {
-            //   text-align: center;  
-            // }
-            text-align: center;
-            padding:.2em;
-            background-color: #EEE;
-            overflow:scroll;
+        font-family: 'Montserrat', sans-serif;
+        font-size:1vmax;
+    
+        #areaBox { //for dimension testing purposes
+            grid-column: 2 / span 2;
+            grid-row: 2/ span 1;
+    
+            background-color: #4287f5;
+            border-radius: 1em;
+            box-shadow: 10px 5px 5px #888888;
+    
+            display:grid;
+            grid-template-rows: 1fr 1fr 1fr;
+    
+            #title {
+                margin-top: 1em;
+                grid-row: 1/span 1;
+                color:#eee;
+                widows: 100%;
+                height: fit-content;
+    
+                p {
+                    font-size: 2em;
+                    text-align: center;
+                }
+            }
+    
+            #text{
+                grid-row: 2/span 1;
+                color:#eee;
+                widows: 100%;
+                height: fit-content;
+    
+                p {
+                    letter-spacing: 0.1em;
+                    font-size: 1em;
+                    text-align: center;
+                }
+            }
+    
+            #input-and-submit{
+                grid-row: 3/span 1;
+                display: grid;
+                grid-template-columns: 37% 1fr 1fr 58%;
+                // margin: auto;
+    
+                input{
+                    justify-content: center;
+                    grid-column: 2/span 1;
+                    height: 2em;
+                    width:7em;
+                    border-style: none;
+                    padding-left: 0.3em;
+                    border-radius: 0.1em;
+                }
+                button{
+                    width:7em;
+                    border-style:none;
+                    border-radius:0.3em;
+                    margin-left: 1em;
+                    grid-column: 3/span 1;
+                    height: 2em;
+                }
+            }
         }
     }
-
-    @media only screen and (min-width: 1440px) {
-        position: fixed;
-        top: 40%;
-        left: 50%;
-        /* bring your own prefixes */
-        transform: translate(-50%, -50%);
-        width: fit-content;
-        text-align: center;        
-
-    }
-    h3 {
-        padding-bottom: 0.5em;
-        border-bottom: black solid;
-    }
-
-    button {
-        font-size: 0.8em;
-        margin-left: 0.75em;
-    }
-
-    input {
-        font-size: 1em;
-        width: 4em;
-        margin-right: 0.75em;
-
     }
     
     
-}
+    //------mobile
+    
+    @media only screen and (max-width: 1440px){
+        body{
+            
+            margin:0px;
+            padding:0px;
+        }
+    
+        #outerScreen {
+            height: 100vh;
+            width: 100vw;
+            //display: grid;
+            //grid-template-columns: auto 25% 25% auto;
+            //grid-template-rows: auto 60% auto;
+            background-color: #4287f5;
+        
+            font-family: 'Montserrat', sans-serif;
+            font-size:3vmax;
+        
+            #areaBox { //for dimension testing purposes
+                height:100%;
+                width:100%;
+        
+                background-color: #4287f5;
+                border-radius: 1em;
+                box-shadow: 10px 5px 5px #888888;
+        
+                display:grid;
+                grid-template-rows: 20% 20% 1fr;
+        
+                #title {
+                    margin-top: 1em;
+                    grid-row: 1/span 1;
+                    color:#eee;
+                    widows: 100%;
+                    height: fit-content;
+        
+                    p {
+                        width:100%;
+                        font-size: 2em;
+                        text-align: center;
+                    }
+                }
+        
+                #text{
+                    grid-row: 2/span 1;
+                    color:#eee;
+                    widows: 100%;
+                    height: fit-content;
+        
+                    p {
+                        letter-spacing: 0.1em;
+                        font-size: 1em;
+                        text-align: center;
+                    }
+                }
+        
+                #input-and-submit{
+                    grid-row: 3/span 1;
+                    display: grid;
+                    grid-template-columns: 30% 1fr 1fr 50%;
+                    // margin: auto;
+        
+                    input{
+                        
+                        grid-column: 2/span 1;
+                        height: 2em;
+                        width:7em;
+                        border-style: none;
+                        padding-left: 0.3em;
+                        border-radius: 0.1em;
+                    }
+                    button{
+                        background-color: #eee;
+                        width:7em;
+                        border-style:none;
+                        border-radius:0.3em;
+                        margin-left: 1em;
+                        grid-column: 3/span 1;
+                        height: 2em;
+                    }
+                }
+            }
+        }
+        }

@@ -91,16 +91,30 @@ const Verification = (props) => {
     }
 
     return(
-        <body >
-            <div className = 'verification-page'>
-                <h3> We need to verify your email </h3>
-                <h4> Please check your umd email to for an email from us containing your security code </h4>
-                <div className = 'input-and-submit'>
-                    <input type = 'number' pattern = '\d*' placeholder = 'code' value = {code} onChange = {(e) => setCode(e.target.value)}/>
-                    <button type = 'submit' onClick = {(e) => handleSubmit(e)} >Submit Code</button>
+        <div id='outerScreen'>
+                <div id='areaBox'>
+                    <div id='title'>
+                        <p>Please Verify</p>
+                    </div>
+                    <div id='text'>
+                        <p>Please check your umd email for <br/> an email from us containing your security code</p>
+                    </div>
+                    <div id = 'input-and-submit'>
+                        <input type = 'number' pattern = '\d*' placeholder = 'code' value = {code} onChange = {(e) => setCode(e.target.value)}/>
+                        <button type = 'submit' onClick = {(e) => handleSubmit(e)} >Submit Code</button>
+                    </div>
                 </div>
             </div>
-        </body>
+        // <body >
+        //     <div className = 'verification-page'>
+        //         <h3> We need to verify your email </h3>
+        //         <h4> Please check your umd email to for an email from us containing your security code </h4>
+        //         <div className = 'input-and-submit'>
+        //             <input type = 'number' pattern = '\d*' placeholder = 'code' value = {code} onChange = {(e) => setCode(e.target.value)}/>
+        //             <button type = 'submit' onClick = {(e) => handleSubmit(e)} >Submit Code</button>
+        //         </div>
+        //     </div>
+        // </body>
     );
 
 }
