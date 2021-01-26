@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef} from 'react';
 import './newSignUpIn.scss';
 import axios from 'axios'
 import { Auth } from 'aws-amplify';
+import Filter from 'bad-words';
 
 
 const SignUp = (props) => {
+    const filter = new Filter();
     const [signUpFields,setSignUpFields] = 
     useState({name:'',email:'',password:'',confirmPassword:'',
     studyBuddy:false,friend:false,sex:false,male:false,
@@ -24,6 +26,7 @@ const SignUp = (props) => {
                         name = 'nonBinary'
                         ref = {whereWeAt}
                         placeholder = 'gender' 
+                        maxLength = '256'
                         value = {signUpFields.nonBinary} 
                         onChange = { (e) => setSignUpFields({...signUpFields,nonBinary:e.target.value}) } 
                     /> 
@@ -36,14 +39,88 @@ const SignUp = (props) => {
 
     async function handleSignUp(e) {
         e.preventDefault();
+
+        if (signUpFields.name.length < 1 || signUpFields.email.length < 1 || signUpFields.password.length < 1
+            || signUpFields.confirmPassword.length < 1 || signUpFields.bio.length < 1 || 
+            (!signUpFields.female && !signUpFields.male && !signUpFields.other) || 
+            (signUpFields.other && signUpFields.nonBinary.length < 1) || 
+            (!signUpFields.studyBuddy && !signUpFields.friend && !signUpFields.sex)) {
+                props.message('Please complete all fields');
+                return;
+        }
+
+        if (filter.isProfane(signUpFields.name)) {
+            props.message('Please obstain from profanity in your name');
+            return;
+        }
+        
+        if (!signUpFields.email.endsWith('umd.edu')) {
+            props.message('Please use your @umd.edu email');
+            return;
+        }
+        
+        if (signUpFields.password.length < 8) {
+            props.message('Your password must contain at least 8 characters');
+            return;
+        }
+        
+        if (signUpFields.password !== signUpFields.confirmPassword) {
+            props.message('Please make sure your passwords match');
+            return;
+        }
+        
+        if (filter.isProfane(signUpFields.bio)) {
+            props.message('Please obstain from profanity in your bio');
+            return;
+        }
+        
+        let inputs = [signUpFields.name, signUpFields.password, signUpFields.nonBinary, signUpFields.bio, signUpFields.email];
+        var i;
+        for(i = 0; i < inputs.length; i++){
+            if(inputs[i].includes('\'') || inputs[i].includes('<') || inputs[i].includes('>')) {
+                props.message('nice try bru');
+                return;
+            }
+        }
+        
+        
         try {
+            var gender = '';
+            if (signUpFields.female) {
+                gender = 'Female';
+            } else if (signUpFields.male) {
+                gender = 'Male';
+            } else {
+                gender = signUpFields.nonBinary;
+            }
+
+            var lookingForSB = 'false';
+            var lookingForF = 'false';
+            var lookingForSF = 'false';
+            if (signUpFields.studyBuddy){
+                lookingForSB = 'true';
+            }
+            if (signUpFields.friend){
+                lookingForF = 'true';
+            }
+            if (signUpFields.sex){
+                lookingForSF = 'true';
+            }
+
             const { user } = await Auth.signUp({
                 username: signUpFields.email,
                 password: signUpFields.password,
                 attributes: {
-                    email: signUpFields.email          // optional
-                    // phone_number,   // optional - E.164 number convention
+                    
+                    email: signUpFields.email,
                     // other custom attributes 
+                    'custom:name': signUpFields.name,
+                    'custom:gender': gender,
+                    'custom:lookingForSB': lookingForSB,
+                    'custom:lookingForF': lookingForF,
+                    'custom:lookingForSF': lookingForSF,
+                    'custom:bio': signUpFields.bio,
+
                 }
             });
             console.log(user);
@@ -71,6 +148,7 @@ const SignUp = (props) => {
                 type = 'text'  
                 name = 'name'
                 placeholder = 'name' 
+                maxLength = '256'
 
                 value = {signUpFields.name} 
                 onChange = { (e) => setSignUpFields({...signUpFields,name:e.target.value}) }
@@ -131,7 +209,7 @@ const SignUp = (props) => {
 
             <div id='bio-field'>
                 <label>Bio</label>
-                <textarea placeholder = 'tell your classmates something about yourself ;)' value={signUpFields.bio} onChange = { (e) => setSignUpFields({...signUpFields,bio:e.target.value})}/>
+                <textarea maxLength = '256' placeholder = 'tell your classmates something about yourself ;)' value={signUpFields.bio} onChange = { (e) => setSignUpFields({...signUpFields,bio:e.target.value})}/>
             </div>
 
             <div id='submit-field'>

@@ -13,12 +13,21 @@ const SignIn = (props) => {
         console.log('sign up init');
         e.preventDefault();
 
+        let inputs = [signUpFields.email, signUpFields.password];
+        var i;
+        for(i = 0; i < inputs.length; i++){
+            if(inputs[i].includes('\'') || inputs[i].includes('<') || inputs[i].includes('>')) {
+                props.message('nice try bru');
+                return;
+            }
+        }
+
         
         try {
             const user = await Auth.signIn(signUpFields.email, signUpFields.password);
             console.log(user);
             props.returnObject({
-                nextPage: 'course-selection'
+                nextPage: 'home-page'
             });
         } catch (error) {
             console.log('error signing in', error);
@@ -32,6 +41,9 @@ const SignIn = (props) => {
                     email: signUpFields.email,
                     password: signUpFields.password
                 });
+            } else {
+                props.message('Incorrect email or password');
+                return;
             }
         }
         

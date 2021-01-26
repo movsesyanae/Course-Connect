@@ -75,6 +75,6 @@ class_hash = soc.get_all_classes("202101")
 puts class_hash.keys.length
 # class_hash = {}
 # class_hash["CMSC351"] = ["Kruskal"]
-File.write('classes.json', JSON.dump(class_hash))
+File.write('new_classes.json', JSON.dump(class_hash))
 # puts soc.get_classes("MATH","202101")
 # soc.get_professors_for_course("CMSC351","202101")

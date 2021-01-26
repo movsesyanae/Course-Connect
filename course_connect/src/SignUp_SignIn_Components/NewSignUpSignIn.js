@@ -10,31 +10,27 @@ const NewSignUpSignIn = (props) => {
     const [needsConfirm, setNeedsConfirm] = useState(false);
     const [authCode, setAuthCode] = useState('');
     const [backUpEmail, setBackUpEmail] = useState('');
+    const [message, setMessage] = useState('');
 
 
     
 
-
-    async function confirmSignUp(e) {    
-        e.preventDefault();    
-
-        const email = backUpEmail;
-        const code = parseInt(authCode);
-
-        try {
-            await Auth.confirmSignUp(email, code);
-        } catch (error) {
-            console.log('error confirming sign up', error);
-        }
-
+    const MessageBox = () => {
+        return (
+            <div className="alert">
+                <ref className="closebtn" onClick = {(e) => setMessage('')}>&times;</ref>
+                {message}
+            </div> 
+        );
     }
 
     return(
         <div id = "newOuterBox">
             
-            <SignUp returnObject = {(value) => props.returnObject(value)}/>
-            <SignIn returnObject = {(value) => props.returnObject(value)}/>
+            <SignUp returnObject = {(value) => props.returnObject(value)} message = {(value) => setMessage(value)} />
+            <SignIn returnObject = {(value) => props.returnObject(value)} message = {(value) => setMessage(value)} />
             <Switcheroo/>
+            {message !== '' ? <MessageBox /> : null}
         </div>
     );
 

@@ -1,8 +1,24 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './mainPage.scss'
+import {Auth, API, graphqlOperation} from 'aws-amplify'
+
 
 const MainPage = (props) => {
 
+
+    useEffect(() => {
+        checkUser();
+    }, [])
+
+    async function checkUser() {
+        console.log('doing this ');
+        try {
+            await Auth.currentSession();
+        } catch(error) {
+            props.returnObject({nextPage: 'sign-out', message: 'not signed in in main-page', error: error});
+        }
+
+    }
 
     return(
         <div className = 'main-page' id='mainBox'>

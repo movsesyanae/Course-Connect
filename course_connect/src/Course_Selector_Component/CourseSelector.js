@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
 import './CourseSelectorStyle.scss'
-import { Auth } from 'aws-amplify';
-
+import { Auth, API, graphqlOperation } from 'aws-amplify';
+import * as mutations from '../graphql/mutations'
+import * as queries from '../graphql/queries'
 
 
 
@@ -33,13 +34,14 @@ const CourseSelector = (props) => {
         try {
             // const x = await Auth.currentSession();
             // console.log('well damn', x);
-            const user = await Auth.currentAuthenticatedUser();
-            console.log('in course-selector', user['attributes']['email']);
-            setEmail(user['attributes']['email']);
+
+            const currentUserInfo = await Auth.currentUserInfo()
+            setEmail(currentUserInfo.attributes['email']);
+
         } catch(error) {
             setEmail(null);
             console.log('got an error in course-selector', error);
-            props.returnObject({nextPage: 'sign-out', message: 'authorization failure in course selector'});
+            props.returnObject({nextPage: 'sign-out', message: 'authorization failure in course selector', error: error});
         }
 
     }
@@ -97,7 +99,7 @@ const CourseSelector = (props) => {
     }
 
     const getProfessorList = (classId) => {
-        var json = require('./classes.json');
+        var json = require('./new_updated_classes.json');
         return(json[classId.toUpperCase()]);
     }
 
@@ -204,13 +206,65 @@ const CourseSelector = (props) => {
 
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async() => {
         //do server call
 
-        //make next page main page
-        props.returnObject({
-            nextPage: 'home-page'
-        });
+        try {
+            // convert course list to string list
+            let newCourseList = [];
+            var i;
+            for( i = 0; i < courseList.length; i++){
+                let cName = courseList[i].id + ' ' + courseList[i].prof;
+                newCourseList.push(cName);
+            }
+            
+            // remove student from previous set of courses
+            var user = await API.graphql(graphqlOperation(queries.getUser, {id: email}));
+            var pastCourses = user.data.getUser.courseList;
+            for(i = 0; i < pastCourses.length; i++){
+                let course = await API.graphql(graphqlOperation(queries.getCourse, {id: pastCourses[i]}));
+                if (course.data.getCourse != null) {
+                    let studentList = course.data.getCourse.studentList;
+                    studentList = studentList.filter(item => item !== email);
+                    let courseUpdate = {id: pastCourses[i], studentList: studentList};
+                    await API.graphql(graphqlOperation(mutations.updateCourse, { input: courseUpdate}));
+                }
+            }
+
+            // add student to new set of courses
+            for(i = 0; i < newCourseList.length; i++) {
+                let course = await API.graphql(graphqlOperation(queries.getCourse, {id: newCourseList[i]}));
+                if (course.data.getCourse == null) {
+                    let createCourseInput = {id: newCourseList[i], studentList: [email]};
+                    await API.graphql(graphqlOperation(mutations.createCourse, {input: createCourseInput}));
+                } else {
+                    let studentList = course.data.getCourse.studentList;
+                    studentList = studentList.push(email);
+                    let courseUpdate = {id: newCourseList[i], studentList: studentList};
+                    await API.graphql(graphqlOperation(mutations.updateCourse, { input: courseUpdate}))
+                }
+            }
+            
+            // update student's course list
+            let updateInput = {id: email, courseList: newCourseList}
+            await API.graphql(graphqlOperation(mutations.updateUser, { input: updateInput}))
+            console.log('course list updated');
+    
+            
+    
+            //make next page main page
+            props.returnObject({
+                nextPage: 'home-page'
+            });
+            
+        } catch(err) {
+            console.log('something went wrong: ', err);
+            props.returnObject({
+                nextPage: 'sign-out',
+                message: 'error in course-selection',
+                error: err
+            })
+        }
     }
 
 
