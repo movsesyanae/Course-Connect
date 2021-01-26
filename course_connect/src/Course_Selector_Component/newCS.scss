@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+#outerBox {
+    height: 100vh;
+    width: 100vw;
+    background-color: #4287f5;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1vmax;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    #addCourses{
+        grid-column: 1/span 1;
+        display: grid;
+        grid-template-rows: 1fr 1fr 50%;
+
+        // #title {
+        //     height: fit-content;
+        //     width: fit-content;
+        //     justify-self: start;
+        //     align-self: center;
+        //     margin-left: 2em;
+
+        //     font-size: 1em;
+        //     color:#eee;
+        // }
+
+        #course-input{
+            align-self: center;
+            background-color: none;
+            font-size: 1.5em;
+
+            ::placeholder{
+                color:#eee;
+            }
+            
+            input{
+                font-size: 1em;
+                background-color: #4287f5;
+                outline: none;
+                border-color: #eee;
+                border-style: solid;
+                border-left: none;
+                border-right:none;
+                border-top:none;
+                color:#eee;
+            }
+        }
+        #prof-select{
+            grid-column: 1 / span 1;
+            grid-row: 2 / span 1;
+            display: grid;
+            grid-row: auto;
+
+            #profName{
+                
+                margin-left: 1em;
+
+                button {
+                    
+                    font-size: 1.5em;
+
+                    padding:0.5em;
+                    border-radius: none;
+                    background-color: #4287f5;
+                    border-color: #eee;
+                    border-style: solid;
+                    border-top:none;
+                    border-right:none;
+                    border-left:none;
+                    color:#eee;
+                    // font-size: 1em;
+                    transition-duration: 0.4s;
+                }
+
+                button:hover{
+                    // border-radius:0.3em;
+                    // background-color: #eee;
+                    border-color:darkgray;
+                }
+            }
+        }
+    }
+
+    #yourCourses{
+        grid-column: 2/span 1;
+        background-color: #eee;
+        display: grid;
+        grid-template-rows: 1fr 1fr 50%;
+
+        #title{
+            align-self: center;
+            padding-left: 0.5em;
+
+            color:#4287f5;
+            font-size: 1.5em;
+        }
+        
+        #courseHolder {
+            grid-row: 2 / span 2;
+            display: grid;
+            grid-row: auto;
+            grid-row-gap: 1em;
+
+            #courseBlock{
+                display:flex;
+                
+                #regCourse{
+                    align-self:flex-start;
+                    padding-left: 0.5em;
+
+                    color:#4287f5;
+                    font-size: 1.5em;
+
+                    
+                
+            
+                }
+
+                #clearCourse {
+                    margin-top: 0.5em;
+                    margin-left: 2em;
+
+                    .close {
+                        position: absolute;
+                        // right: 32px;
+                        // top: 32px;
+                        width: 1em;
+                        height: 1em;
+                        opacity: 0.3;
+                      }
+                      .close:hover {
+                        opacity: 1;
+                      }
+                      .close:before, .close:after {
+                        position: absolute;
+                        content: ' ';
+                        height: 1em;
+                        width: 2px;
+                        background-color: #333;
+                      }
+                      .close:before {
+                        transform: rotate(45deg);
+                      }
+                      .close:after {
+                        transform: rotate(-45deg);
+                      }
+                }
+
+            }
+
+            
+        }
+        #submit-btn{
+            margin-left: 1em;
+            button {
+                padding:0.5em;
+                border-radius: none;
+                background-color: #eee;
+                border-color: #4287f5;
+                border-style: solid;
+                border-top:none;
+                border-right:none;
+                border-left:none;
+                color:#4287f5;
+                font-size: 1.5em;
+                transition-duration: 0.4s;
+            }
+            button:hover{
+                border-color:darkgray;
+            }
+        }
+    }
+}

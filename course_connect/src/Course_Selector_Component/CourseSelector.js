@@ -24,25 +24,25 @@ const CourseSelector = (props) => {
     // 3 - max number of courses already added
 
 
-    useEffect(() => {
-        checkUser();
-    }, [])
+    // useEffect(() => {
+    //     checkUser();
+    // }, [])
 
-    async function checkUser() {
-        console.log('doing this ');
-        try {
-            // const x = await Auth.currentSession();
-            // console.log('well damn', x);
-            const user = await Auth.currentAuthenticatedUser();
-            console.log('in course-selector', user['attributes']['email']);
-            setEmail(user['attributes']['email']);
-        } catch(error) {
-            setEmail(null);
-            console.log('got an error in course-selector', error);
-            props.returnObject({nextPage: 'sign-out', message: 'authorization failure in course selector'});
-        }
+    // async function checkUser() {
+    //     console.log('doing this ');
+    //     try {
+    //         // const x = await Auth.currentSession();
+    //         // console.log('well damn', x);
+    //         const user = await Auth.currentAuthenticatedUser();
+    //         console.log('in course-selector', user['attributes']['email']);
+    //         setEmail(user['attributes']['email']);
+    //     } catch(error) {
+    //         setEmail(null);
+    //         console.log('got an error in course-selector', error);
+    //         props.returnObject({nextPage: 'sign-out', message: 'authorization failure in course selector'});
+    //     }
 
-    }
+    // }
 
 
     const updateProfessor = (e) => {

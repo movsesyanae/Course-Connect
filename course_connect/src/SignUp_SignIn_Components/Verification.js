@@ -6,22 +6,22 @@ import { Auth } from 'aws-amplify';
 const Verification = (props) => {
     const [code, setCode] = useState('');
 
-    useEffect(() => {
-        checkUser();
-    }, [])
+    // useEffect(() => {
+    //     checkUser();
+    // }, [])
 
-    async function checkUser() {
-        console.log('doing this ');
-        try {
-            // const x = await Auth.currentSession();
-            // console.log('well damn', x);
-            const user = await Auth.currentAuthenticatedUser();
-            console.log('already verified in verification page', user['attributes']['email']);
-            props.returnObject({nextPage: 'sign-out', message: 'already verified in email confirmation page'});            
-        } catch(error) {
-        }
+    // async function checkUser() {
+    //     console.log('doing this ');
+    //     try {
+    //         // const x = await Auth.currentSession();
+    //         // console.log('well damn', x);
+    //         const user = await Auth.currentAuthenticatedUser();
+    //         console.log('already verified in verification page', user['attributes']['email']);
+    //         props.returnObject({nextPage: 'sign-out', message: 'already verified in email confirmation page'});            
+    //     } catch(error) {
+    //     }
 
-    }
+    // }
 
     async function handleSubmit(e) {
 
@@ -57,12 +57,27 @@ const Verification = (props) => {
 
     return(
         <body >
-            <div className = 'verification-page'>
+            {/* <div className = 'verification-page'>
                 <h3> We need to verify your email </h3>
                 <h4> Please check your umd email to for an email from us containing your security code </h4>
                 <div className = 'input-and-submit'>
                     <input type = 'number' pattern = '\d*' placeholder = 'code' value = {code} onChange = {(e) => setCode(e.target.value)}/>
                     <button type = 'submit' onClick = {(e) => handleSubmit(e)} >Submit Code</button>
+                </div>
+            </div> */}
+
+            <div id='outerScreen'>
+                <div id='areaBox'>
+                    <div id='title'>
+                        <p>Please Verify</p>
+                    </div>
+                    <div id='text'>
+                        <p>Please check your umd email for <br/> an email from us containing your security code</p>
+                    </div>
+                    <div id = 'input-and-submit'>
+                        <input type = 'number' pattern = '\d*' placeholder = 'code' value = {code} onChange = {(e) => setCode(e.target.value)}/>
+                        <button type = 'submit' onClick = {(e) => handleSubmit(e)} >Submit Code</button>
+                    </div>
                 </div>
             </div>
         </body>
