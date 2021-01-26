@@ -106,7 +106,9 @@ const Verification = (props) => {
                         <button type = 'submit' onClick = {(e) => handleSubmit(e)} >Submit Code</button>
                     </div>
                 </div>
-            </div>
+            </div> 
+
+     
         // <body >
         //     <div className = 'verification-page'>
         //         <h3> We need to verify your email </h3>
